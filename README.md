@@ -1,0 +1,25 @@
+# Mohamed Alaa Portfolio
+
+Static HTML pages are served directly by Vercel. The chat pages call the Vercel
+serverless function at `/api/chat`, which keeps Google AI Studio API keys on the
+server and uses Gemini for both chat experiences.
+
+## Configure locally
+
+1. Copy `.env.example` to `.env.local`.
+2. Set `GEMINI_API_KEYS` to one or more Google AI Studio API keys, separated by
+   commas or new lines. Keep `.env.local` private; it is ignored by Git.
+3. Optionally set `GEMINI_MODEL`; the default is `gemini-flash-lite-latest`.
+4. Run `vercel dev` to test the pages and serverless function locally.
+
+## Deploy to Vercel
+
+Import the repository into Vercel and add the same environment variables in
+**Project Settings → Environment Variables** for the environments you use.
+Redeploy after changing environment variables. Vercel deploys `index.html`,
+`project.html`, and `api/chat.js` without a frontend build step.
+
+The API rotates keys with an in-memory counter per running serverless instance,
+so Vercel may not preserve one global order across requests handled by different
+instances. If Gemini rejects a key or reports a quota limit, the API tries the
+remaining configured keys in rotation order. At most five keys are supported.
