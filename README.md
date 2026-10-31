@@ -29,10 +29,11 @@ so Vercel may not preserve one global order across requests handled by different
 instances. If Gemini rejects a key or reports a quota limit, the API tries the
 remaining configured keys in rotation order. At most five keys are supported.
 
-The shared assistant is grounded in facts and demo limitations published across
-the CV and project pages. The Arabic chatbot demo can also answer general
-programming and AI questions, but is instructed to distinguish those answers
-from verified project details.
+The shared assistant can answer general questions on any topic as well as
+questions about the CV and projects. It is instructed to distinguish general
+knowledge from verified site details and to avoid claiming live web access.
+The Arabic chatbot demo can also answer general programming and AI questions,
+but is instructed to distinguish those answers from verified project details.
 
 The shared assistant conversation is retained for the current browser session
 while navigating between the CV and project pages.
