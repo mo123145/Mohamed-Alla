@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="ai-assistant.css" />
 </head>
 <body>
 
@@ -23,69 +24,64 @@
     طباعة / Print
   </button>
 
-  <!-- AI Chat Button -->
-  <button class="ai-chat-btn" onclick="openChat()" id="aiChatBtn">
+  <!-- AI Site Assistant -->
+  <button class="ai-chat-btn" id="aiChatBtn" type="button" aria-controls="chatModal" aria-expanded="false">
     <span class="ai-dot"></span>
-    تحدث مع Mohamed AI 🤖
+    اسأل مساعد الموقع الذكي 🤖
   </button>
 
-  <!-- AI Chat Modal -->
-  <div class="modal-overlay" id="chatModal" onclick="closeOnOverlay(event)">
-    <div class="chat-modal" id="chatBox">
-      <!-- Header -->
+  <div class="modal-overlay" id="chatModal" aria-hidden="true" inert>
+    <section class="chat-modal" id="chatBox" role="dialog" aria-modal="true" aria-labelledby="chatTitle" tabindex="-1">
       <div class="chat-header">
         <div class="chat-avatar">
           <img src="photo.jpg" alt="Mohamed" />
         </div>
         <div>
-          <div class="chat-name">محمد علاء الدين · AI Clone</div>
-          <div class="chat-status"><span class="chat-status-dot"></span> متصل الآن · Online Now</div>
+          <div class="chat-name" id="chatTitle">مساعد الموقع الذكي</div>
+          <div class="chat-status"><span class="chat-status-dot"></span> اسأل عن السيرة والمشاريع</div>
         </div>
-        <div class="chat-ai-badge">🤖 AI Mode</div>
-        <button class="chat-close" onclick="closeChat()">✕</button>
+        <div class="chat-ai-badge">Gemini AI 🤖</div>
+        <button class="chat-close" id="chatClose" type="button" aria-label="إغلاق المحادثة">✕</button>
       </div>
 
-      <!-- Messages -->
-      <div class="chat-body" id="chatBody">
-        <!-- Initial AI message -->
-        <div class="chat-msg ai" id="welcomeMsg">
+      <div class="chat-body" id="chatBody" role="log" aria-live="polite" aria-relevant="additions">
+        <div class="chat-msg ai">
           <div class="chat-msg-avatar">
             <img src="photo.jpg" alt="Mohamed" />
           </div>
           <div>
             <div class="chat-bubble">
-              أهلاً بيك! 👋 أنا النسخة الـ AI من محمد علاء الدين — طالب ذكاء اصطناعي من القاهرة. اسألني عن أي حاجة تخصني: تعليمي، مهاراتي، أهدافي، أو حتى أفضل مشاريعي!
+              أهلاً بيك! 👋 أنا مساعد الموقع الذكي. اسألني عن السيرة الذاتية أو أي مشروع وتقنية موجودة في الموقع.
             </div>
-            <div class="chat-time">الآن · Just now</div>
+            <div class="chat-time">مساعد الموقع</div>
           </div>
         </div>
       </div>
 
-      <!-- Quick Replies -->
       <div class="quick-replies" id="quickReplies">
-        <button class="quick-btn" onclick="sendQuick('ما هي مهاراتك؟')">💻 ما هي مهاراتك؟</button>
-        <button class="quick-btn" onclick="sendQuick('ما هو هدفك المستقبلي؟')">🎯 هدفك المستقبلي؟</button>
-        <button class="quick-btn" onclick="sendQuick('ما رأيك في الذكاء الاصطناعي؟')">🤖 رأيك في الـ AI؟</button>
-        <button class="quick-btn" onclick="sendQuick('كيف أتواصل معك؟')">📞 كيف أتواصل معك؟</button>
+        <button class="quick-btn" type="button" data-chat-question="ما هي مهارات محمد؟">💻 المهارات</button>
+        <button class="quick-btn" type="button" data-chat-question="احكي لي عن المشاريع الموجودة في الموقع">🚀 المشاريع</button>
+        <button class="quick-btn" type="button" data-chat-question="ما التقنيات المستخدمة في مشروع التعرف على الوجوه؟">🤖 التقنيات</button>
+        <button class="quick-btn" type="button" data-chat-question="كيف أتواصل مع محمد؟">📞 التواصل</button>
       </div>
 
-      <!-- Input -->
       <div class="chat-footer">
         <input
           class="chat-input"
           id="chatInput"
           type="text"
-          placeholder="اسأل محمد أي سؤال..."
-          onkeydown="if(event.key==='Enter') sendMessage()"
+          maxlength="4000"
+          placeholder="اسأل عن السيرة أو المشاريع..."
           autocomplete="off"
+          aria-label="اكتب سؤالك لمساعد الموقع"
         />
-        <button class="chat-send" onclick="sendMessage()">
+        <button class="chat-send" id="chatSend" type="button" aria-label="إرسال السؤال">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
           </svg>
         </button>
       </div>
-    </div>
+    </section>
   </div>
 
   <div class="page-wrapper">
@@ -97,7 +93,7 @@
           <div class="badge">AI Student & Developer</div>
           <div class="name-en">Mohamed Alaa El-Din</div>
           <div class="name-ar">محمد علاء الدين محمد سيد</div>
-          <div class="title-en">Artificial Intelligence Enthusiast · Cairo, Egypt 🇪🇬</div>
+          <div class="title-en">Artificial Intelligence Enthusiast · Beni Suef , Egypt 🇪🇬</div>
           <div class="contact-grid">
             <a href="tel:01555513460" class="contact-item">
               <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -115,7 +111,7 @@
               <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
               </svg>
-              القاهرة، مصر
+              بني سويف ، مصر
             </span>
           </div>
         </div>
@@ -164,7 +160,7 @@
           <div class="msg-sig">
             <div>
               <div class="msg-sig-name">محمد علاء الدين · Mohamed Alaa</div>
-              <div class="msg-sig-sub">AI Student · Cairo 🇪🇬 · 2026</div>
+              <div class="msg-sig-sub">AI Student · Beni Suef · 2026</div>
             </div>
           </div>
         </div>
@@ -494,6 +490,7 @@
   </div>
 
   <script src="chat-api.js"></script>
+  <script src="chat-assistant.js"></script>
   <script src="index.js"></script>
 </body>
 </html>

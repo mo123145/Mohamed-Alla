@@ -22,120 +22,6 @@
     }, { threshold: 0.3 });
     document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
-    // ===== AI CHAT =====
-    const chatHistory = [];
-    let chatSending = false;
-
-    function openChat() {
-      document.getElementById('chatModal').classList.add('open');
-    }
-    function closeChat() {
-      document.getElementById('chatModal').classList.remove('open');
-    }
-    function closeOnOverlay(e) {
-      if (e.target === document.getElementById('chatModal')) closeChat();
-    }
-
-    function addMessage(text, isUser) {
-      const body = document.getElementById('chatBody');
-      const div = document.createElement('div');
-      div.className = 'chat-msg ' + (isUser ? 'user' : 'ai');
-      const now = new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
-      if (isUser) {
-        const messageContent = document.createElement('div');
-        const bubble = document.createElement('div');
-        bubble.className = 'chat-bubble';
-        bubble.textContent = text;
-        const time = document.createElement('div');
-        time.className = 'chat-time';
-        time.style.textAlign = 'left';
-        time.textContent = now;
-        const avatar = document.createElement('div');
-        avatar.className = 'chat-msg-avatar user-av';
-        avatar.textContent = 'أنت';
-        messageContent.append(bubble, time);
-        div.append(messageContent, avatar);
-      } else {
-        const avatar = document.createElement('div');
-        avatar.className = 'chat-msg-avatar';
-        const image = document.createElement('img');
-        image.src = 'photo.jpg';
-        image.alt = 'Mohamed';
-        avatar.appendChild(image);
-        const messageContent = document.createElement('div');
-        const bubble = document.createElement('div');
-        bubble.className = 'chat-bubble';
-        bubble.textContent = text;
-        const time = document.createElement('div');
-        time.className = 'chat-time';
-        time.textContent = now;
-        messageContent.append(bubble, time);
-        div.append(avatar, messageContent);
-      }
-      body.appendChild(div);
-      body.scrollTop = body.scrollHeight;
-    }
-
-    function showTyping() {
-      const body = document.getElementById('chatBody');
-      const typing = document.createElement('div');
-      typing.className = 'chat-msg ai';
-      typing.id = 'typingIndicator';
-      typing.innerHTML = `
-        <div class="chat-msg-avatar"><img src="photo.jpg" alt="Mohamed" /></div>
-        <div class="typing-bubble show">
-          <div class="typing-indicator">
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-          </div>
-        </div>`;
-      body.appendChild(typing);
-      body.scrollTop = body.scrollHeight;
-    }
-
-    function removeTyping() {
-      const t = document.getElementById('typingIndicator');
-      if (t) t.remove();
-    }
-
-    async function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const text = input.value.trim();
-      if (!text || chatSending) return;
-      chatSending = true;
-      input.value = '';
-      document.getElementById('quickReplies').style.display = 'none';
-      document.querySelector('.chat-send').disabled = true;
-      addMessage(text, true);
-      chatHistory.push({ role: 'user', text });
-      showTyping();
-      try {
-        const reply = await requestAIResponse(chatHistory.slice(-12), 'portfolio');
-        chatHistory.push({ role: 'model', text: reply });
-        removeTyping();
-        addMessage(reply, false);
-      } catch (error) {
-        chatHistory.pop();
-        removeTyping();
-        addMessage(error.message || 'تعذر الاتصال بالمساعد الذكي. حاول مرة أخرى.', false);
-      } finally {
-        chatSending = false;
-        document.querySelector('.chat-send').disabled = false;
-        input.focus();
-      }
-    }
-
-    function sendQuick(text) {
-      document.getElementById('chatInput').value = text;
-      sendMessage();
-    }
-
-    // ESC to close
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeChat(); closeProject(); }
-    });
-
     // ===== PROJECT MODAL DATA =====
     const PROJECTS = [
       {
@@ -194,6 +80,10 @@
     function openProject(index) {
       window.location.href = `project.html?id=${index}#project-${index}`;
     }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeProject();
+    });
 
     function closeProject() {
       document.getElementById('projModal').classList.remove('open');

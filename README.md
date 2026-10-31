@@ -1,8 +1,9 @@
 # Mohamed Alaa Portfolio
 
-Static HTML pages are served directly by Vercel. The chat pages call the Vercel
-serverless function at `/api/chat`, which keeps Google AI Studio API keys on the
-server and uses Gemini for both chat experiences.
+Static HTML pages are served directly by Vercel. The shared AI assistant is
+available on the CV and project pages. Both it and the Arabic chatbot demo call
+the Vercel serverless function at `/api/chat`, which keeps Google AI Studio API
+keys on the server and uses Gemini.
 
 ## Configure locally
 
@@ -11,6 +12,10 @@ server and uses Gemini for both chat experiences.
    commas or new lines. Keep `.env.local` private; it is ignored by Git.
 3. Optionally set `GEMINI_MODEL`; the default is `gemini-flash-lite-latest`.
 4. Run `vercel dev` to test the pages and serverless function locally.
+
+Opening an HTML file directly or using a static-only local server does not run
+the `/api/chat` function. Use `vercel dev` or deploy the project to Vercel for
+the AI chat to work.
 
 ## Deploy to Vercel
 
@@ -23,3 +28,11 @@ The API rotates keys with an in-memory counter per running serverless instance,
 so Vercel may not preserve one global order across requests handled by different
 instances. If Gemini rejects a key or reports a quota limit, the API tries the
 remaining configured keys in rotation order. At most five keys are supported.
+
+The shared assistant is grounded in facts and demo limitations published across
+the CV and project pages. The Arabic chatbot demo can also answer general
+programming and AI questions, but is instructed to distinguish those answers
+from verified project details.
+
+The shared assistant conversation is retained for the current browser session
+while navigating between the CV and project pages.

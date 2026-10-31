@@ -9,11 +9,71 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Outfit:wght@300;400;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="project.css" />
+  <link rel="stylesheet" href="ai-assistant.css" />
 </head>
 <body>
 
   <!-- Floating particles -->
   <div class="particles" id="particles"></div>
+
+  <button class="ai-chat-btn" id="aiChatBtn" type="button" aria-controls="chatModal" aria-expanded="false">
+    <span class="ai-dot"></span>
+    اسأل مساعد الموقع الذكي 🤖
+  </button>
+
+  <div class="modal-overlay" id="chatModal" aria-hidden="true" inert>
+    <section class="chat-modal" id="chatBox" role="dialog" aria-modal="true" aria-labelledby="chatTitle" tabindex="-1">
+      <div class="chat-header">
+        <div class="chat-avatar">
+          <img src="photo.jpg" alt="Mohamed" />
+        </div>
+        <div>
+          <div class="chat-name" id="chatTitle">مساعد الموقع الذكي</div>
+          <div class="chat-status"><span class="chat-status-dot"></span> اسأل عن السيرة والمشاريع</div>
+        </div>
+        <div class="chat-ai-badge">Gemini AI 🤖</div>
+        <button class="chat-close" id="chatClose" type="button" aria-label="إغلاق المحادثة">✕</button>
+      </div>
+
+      <div class="chat-body" id="chatBody" role="log" aria-live="polite" aria-relevant="additions">
+        <div class="chat-msg ai">
+          <div class="chat-msg-avatar">
+            <img src="photo.jpg" alt="Mohamed" />
+          </div>
+          <div>
+            <div class="chat-bubble">
+              أهلاً بيك! 👋 أنا مساعد الموقع الذكي. اسألني عن السيرة الذاتية أو أي مشروع وتقنية موجودة في الموقع.
+            </div>
+            <div class="chat-time">مساعد الموقع</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-replies" id="quickReplies">
+        <button class="quick-btn" type="button" data-chat-question="ما هي مهارات محمد؟">💻 المهارات</button>
+        <button class="quick-btn" type="button" data-chat-question="احكي لي عن المشاريع الموجودة في الموقع">🚀 المشاريع</button>
+        <button class="quick-btn" type="button" data-chat-question="ما التقنيات المستخدمة في مشروع التعرف على الوجوه؟">🤖 التقنيات</button>
+        <button class="quick-btn" type="button" data-chat-question="كيف أتواصل مع محمد؟">📞 التواصل</button>
+      </div>
+
+      <div class="chat-footer">
+        <input
+          class="chat-input"
+          id="chatInput"
+          type="text"
+          maxlength="4000"
+          placeholder="اسأل عن السيرة أو المشاريع..."
+          autocomplete="off"
+          aria-label="اكتب سؤالك لمساعد الموقع"
+        />
+        <button class="chat-send" id="chatSend" type="button" aria-label="إرسال السؤال">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
 
   <div class="page-wrapper">
 
@@ -579,6 +639,7 @@
   </div>
 
   <script src="chat-api.js"></script>
+  <script src="chat-assistant.js"></script>
   <script src="project.js"></script>
 </body>
 </html>
