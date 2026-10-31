@@ -350,11 +350,7 @@ class ChestXRayClassifier(nn.Module):
     function renderProject(index) {
       currentProjectIndex = index;
       const p = PROJECTS_DATA[index];
-
-      // Update Top Nav Tabs
-      document.querySelectorAll('.nav-tab').forEach((tab, i) => {
-        tab.classList.toggle('active', i === index);
-      });
+      document.title = `${p.titleAr} | Mohamed Alaa El-Din`;
 
       // Update Hero Content
       document.getElementById('breadcrumbTitle').textContent = p.titleAr;
@@ -418,26 +414,13 @@ class ChestXRayClassifier(nn.Module):
       const nextIdx = (index + 1) % PROJECTS_DATA.length;
       document.getElementById('prevProjTitle').textContent = PROJECTS_DATA[prevIdx].titleAr;
       document.getElementById('nextProjTitle').textContent = PROJECTS_DATA[nextIdx].titleAr;
+      document.getElementById('prevProjCard').href = `project.html?id=${prevIdx}#project-${prevIdx}`;
+      document.getElementById('nextProjCard').href = `project.html?id=${nextIdx}#project-${nextIdx}`;
 
       // Update URL hash / query without reloading
       if (history.replaceState) {
         history.replaceState(null, null, `?id=${index}#project-${index}`);
       }
-    }
-
-    function switchProject(index) {
-      renderProject(index);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function goToPrevProject() {
-      const prevIdx = (currentProjectIndex - 1 + PROJECTS_DATA.length) % PROJECTS_DATA.length;
-      switchProject(prevIdx);
-    }
-
-    function goToNextProject() {
-      const nextIdx = (currentProjectIndex + 1) % PROJECTS_DATA.length;
-      switchProject(nextIdx);
     }
 
     function escapeHtml(str) {

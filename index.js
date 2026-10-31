@@ -191,12 +191,8 @@
       }
     ];
 
-    function goToProject(index) {
-      window.location.href = `project.html?id=${index}#project-${index}`;
-    }
-
     function openProject(index) {
-      goToProject(index);
+      window.location.href = `project.html?id=${index}#project-${index}`;
     }
 
     function closeProject() {

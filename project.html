@@ -26,28 +26,6 @@
         العودة للسيرة الذاتية (CV)
       </a>
 
-      <!-- Quick Project Tabs for All 6 Projects -->
-      <div class="nav-tabs" id="navTabsContainer">
-        <button class="nav-tab active" onclick="switchProject(0)" id="tab-0">
-          <span>🗄️</span> نظام الطلاب
-        </button>
-        <button class="nav-tab" onclick="switchProject(1)" id="tab-1">
-          <span>🤖</span> AI Chatbot
-        </button>
-        <button class="nav-tab" onclick="switchProject(2)" id="tab-2">
-          <span>🌐</span> Portfolio
-        </button>
-        <button class="nav-tab" onclick="switchProject(3)" id="tab-3">
-          <span>👁️</span> كشف الوجوه
-        </button>
-        <button class="nav-tab" onclick="switchProject(4)" id="tab-4">
-          <span>📈</span> توقع العقارات
-        </button>
-        <button class="nav-tab" onclick="switchProject(5)" id="tab-5">
-          <span>🩺</span> التشخيص الطبي
-        </button>
-      </div>
-
       <a href="index.html" class="nav-user">
         <div class="nav-avatar">
           <img src="photo.jpg" alt="Mohamed" />
@@ -540,21 +518,21 @@
 
     <!-- NEXT & PREVIOUS PROJECTS -->
     <div class="project-nav-footer">
-      <div class="proj-nav-card" onclick="goToPrevProject()" id="prevProjCard">
+      <a class="proj-nav-card" id="prevProjCard">
         <div class="proj-nav-arrow">→</div>
         <div>
           <div class="proj-nav-sub">المشروع السابق</div>
           <div class="proj-nav-title" id="prevProjTitle">Portfolio Website</div>
         </div>
-      </div>
+      </a>
 
-      <div class="proj-nav-card" style="flex-direction:row-reverse; text-align:left;" onclick="goToNextProject()" id="nextProjCard">
+      <a class="proj-nav-card" id="nextProjCard" style="flex-direction:row-reverse; text-align:left;">
         <div class="proj-nav-arrow">←</div>
         <div>
           <div class="proj-nav-sub">المشروع التالي</div>
           <div class="proj-nav-title" id="nextProjTitle">AI Chatbot بالعربي</div>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- FOOTER -->
