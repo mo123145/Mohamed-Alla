@@ -16,10 +16,11 @@
       container.appendChild(p);
     }
 
-    // ===== ALL 6 PROJECTS DATA =====
+    // ===== ALL 14 PROJECTS DATA =====
     const PROJECTS_DATA = [
       {
         id: 0,
+        demoId: 'demo-student-system',
         slug: 'student-management',
         emoji: '🗄️',
         titleAr: 'نظام إدارة الطلاب',
@@ -83,6 +84,7 @@ public:
       },
       {
         id: 1,
+        demoId: 'demo-ai-chatbot',
         slug: 'ai-chatbot',
         emoji: '🤖',
         titleAr: 'AI Chatbot بالعربي',
@@ -130,6 +132,7 @@ class ArabicNLPEngine:
       },
       {
         id: 2,
+        demoId: 'demo-portfolio',
         slug: 'portfolio-website',
         emoji: '🌐',
         titleAr: 'Portfolio Website',
@@ -165,6 +168,7 @@ class ArabicNLPEngine:
       },
       {
         id: 3,
+        demoId: 'demo-face-recognition',
         slug: 'face-recognition-attendance',
         emoji: '👁️',
         titleAr: 'نظام التعرف على الوجوه والحضور الذكي',
@@ -226,6 +230,7 @@ class AttendanceFaceScanner:
       },
       {
         id: 4,
+        demoId: 'demo-real-estate',
         slug: 'real-estate-prediction',
         emoji: '📈',
         titleAr: 'نموذج التنبؤ بأسعار العقارات وتحليل البيانات',
@@ -278,6 +283,7 @@ class HousingModel:
       },
       {
         id: 5,
+        demoId: 'demo-medical-ai',
         slug: 'ai-medical-diagnosis',
         emoji: '🩺',
         titleAr: 'مساعد التشخيص الطبي بالذكاء الاصطناعي',
@@ -331,6 +337,327 @@ class ChestXRayClassifier(nn.Module):
           { val: '18ms', lbl: 'زمن الفحص للصورة' },
           { val: 'AUC 0.98', lbl: 'منحنى أداء النموذج الطبي' }
         ]
+      },
+      {
+        id: 6,
+        demoId: 'demo-portfolio',
+        slug: 'responsive-portfolio',
+        emoji: '📱',
+        titleAr: 'موقع شخصي (Portfolio) متجاوب',
+        titleEn: 'Responsive Personal Portfolio',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'تطوير واجهات الويب',
+        year: '2026',
+        desc: 'موقع تعريفي متجاوب مع الشاشات المختلفة، يضم أقساماً للمهارات والمشاريع والتواصل مع حركات وتأثيرات سلسة. هذا المشروع يشارك معاينة البورتفوليو الحالية.',
+        features: [
+          { icon: '📱', title: 'توافق مع الشاشات', desc: 'تخطيط مرن للعرض على الهاتف والكمبيوتر.' },
+          { icon: '🧭', title: 'أقسام واضحة', desc: 'عرض المهارات والمشاريع ووسائل التواصل.' },
+          { icon: '✨', title: 'تفاعلات سلسة', desc: 'حركات انتقال وتأثيرات بصرية للواجهة.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة محتوى الصفحات' },
+          { icon: '🎨', name: 'CSS', role: 'تنسيق متجاوب وتأثيرات بصرية' },
+          { icon: '⚡', name: 'JavaScript', role: 'التفاعلات وسلوك الواجهة' }
+        ],
+        codeFile: 'responsive-layout.css',
+        code: `.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .portfolio-header {
+    flex-direction: column;
+  }
+}`,
+        metrics: [
+          { val: 'Responsive', lbl: 'التصميم' },
+          { val: 'HTML', lbl: 'بنية الصفحة' },
+          { val: 'CSS', lbl: 'الواجهة' },
+          { val: 'JavaScript', lbl: 'التفاعل' }
+        ]
+      },
+      {
+        id: 7,
+        demoId: 'demo-store',
+        slug: 'ecommerce-store',
+        emoji: '🛍️',
+        titleAr: 'متجر إلكتروني',
+        titleEn: 'Interactive E-commerce Store',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'تطوير الويب والتجارة الإلكترونية',
+        year: '2026',
+        desc: 'واجهة متجر إلكتروني تعرض منتجات تجريبية مع فلترة حسب القسم والسعر وسلة مشتريات تحفظ محتوياتها محلياً في المتصفح.',
+        features: [
+          { icon: '🛒', title: 'سلة مشتريات', desc: 'إضافة المنتجات ومراجعة الكميات والإجمالي.' },
+          { icon: '🔎', title: 'البحث والفلترة', desc: 'تصفية المنتجات حسب القسم والسعر.' },
+          { icon: '💾', title: 'حفظ محلي', desc: 'الاحتفاظ بالسلة في LocalStorage على الجهاز.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة واجهة المتجر' },
+          { icon: '🎨', name: 'CSS', role: 'تصميم المنتجات والسلة' },
+          { icon: '⚡', name: 'JavaScript', role: 'البحث والفلترة وإدارة السلة' },
+          { icon: '💾', name: 'LocalStorage', role: 'حفظ السلة في المتصفح' }
+        ],
+        codeFile: 'cart.js',
+        code: `function addToCart(cart, product) {
+  const item = cart.find(entry => entry.id === product.id);
+  if (item) item.quantity += 1;
+  else cart.push({ ...product, quantity: 1 });
+  localStorage.setItem('store-cart', JSON.stringify(cart));
+  return cart;
+}`,
+        metrics: [
+          { val: 'Products', lbl: 'عرض المنتجات' },
+          { val: 'Filters', lbl: 'بحث وفلترة' },
+          { val: 'Cart', lbl: 'سلة المشتريات' },
+          { val: 'Local', lbl: 'حفظ بالمتصفح' }
+        ]
+      },
+      {
+        id: 8,
+        demoId: 'demo-todo',
+        slug: 'todo-app',
+        emoji: '✅',
+        titleAr: 'تطبيق إدارة المهام',
+        titleEn: 'Daily To-do App',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'تطبيقات الويب والإنتاجية',
+        year: '2026',
+        desc: 'تطبيق لإدارة المهام اليومية يدعم الإضافة والتعديل والحذف وتحديد الأولوية، ويحفظ قائمة المهام في LocalStorage.',
+        features: [
+          { icon: '➕', title: 'إدارة المهام', desc: 'إضافة المهام وتعديلها وحذفها من القائمة.' },
+          { icon: '🎯', title: 'تحديد الأولوية', desc: 'اختيار أولوية لكل مهمة.' },
+          { icon: '💾', title: 'حفظ تلقائي', desc: 'استعادة المهام بعد تحديث الصفحة من المتصفح.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة التطبيق' },
+          { icon: '🎨', name: 'CSS', role: 'تنسيق قائمة المهام' },
+          { icon: '⚡', name: 'JavaScript', role: 'إدارة المهام والتفاعلات' },
+          { icon: '💾', name: 'LocalStorage', role: 'حفظ المهام محلياً' }
+        ],
+        codeFile: 'tasks.js',
+        code: `function saveTasks(tasks) {
+  localStorage.setItem('todo-tasks', JSON.stringify(tasks));
+}
+
+function addTask(tasks, title, priority) {
+  return [...tasks, {
+    id: crypto.randomUUID(),
+    title,
+    priority,
+    done: false
+  }];
+}`,
+        metrics: [
+          { val: 'Create', lbl: 'إضافة مهام' },
+          { val: 'Edit', lbl: 'تعديل المهام' },
+          { val: 'Priority', lbl: 'الأولويات' },
+          { val: 'Local', lbl: 'حفظ بالمتصفح' }
+        ]
+      },
+      {
+        id: 9,
+        demoId: 'demo-weather',
+        slug: 'weather-app',
+        emoji: '🌦️',
+        titleAr: 'تطبيق الطقس',
+        titleEn: 'City Weather Forecast',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'تطبيقات الويب وواجهات API',
+        year: '2026',
+        desc: 'تطبيق للبحث عن حالة الطقس في المدن وعرض درجة الحرارة والرطوبة وتوقعات الأيام القادمة باستخدام خدمة الطقس والبحث الجغرافي من Open-Meteo.',
+        features: [
+          { icon: '🔎', title: 'البحث عن مدينة', desc: 'العثور على المدينة ثم جلب توقعاتها من خدمة الطقس.' },
+          { icon: '🌡️', title: 'بيانات الطقس', desc: 'عرض درجة الحرارة والرطوبة الحالية.' },
+          { icon: '📅', title: 'توقعات الأيام القادمة', desc: 'عرض ملخص الطقس ودرجات الحرارة اليومية.' }
+        ],
+        tech: [
+          { icon: '⚡', name: 'JavaScript Fetch', role: 'طلب البيانات من واجهة الطقس' },
+          { icon: '🌍', name: 'Open-Meteo API', role: 'البحث الجغرافي وتوقعات الطقس' },
+          { icon: '🌐', name: 'HTML & CSS', role: 'عرض حالة الطقس والتوقعات' }
+        ],
+        codeFile: 'weather.js',
+        code: `const response = await fetch(
+  'https://api.open-meteo.com/v1/forecast?' +
+  new URLSearchParams({
+    latitude,
+    longitude,
+    current: 'temperature_2m,relative_humidity_2m',
+    daily: 'temperature_2m_max,temperature_2m_min',
+    timezone: 'auto'
+  })
+);
+if (!response.ok) throw new Error('Weather request failed');
+const forecast = await response.json();`,
+        metrics: [
+          { val: 'Search', lbl: 'البحث عن المدن' },
+          { val: 'Current', lbl: 'الطقس الحالي' },
+          { val: '5 Days', lbl: 'توقعات الطقس' },
+          { val: 'API', lbl: 'مصدر البيانات' }
+        ]
+      },
+      {
+        id: 10,
+        demoId: 'demo-ai-chatbot',
+        slug: 'website-ai-assistant',
+        emoji: '💬',
+        titleAr: 'مساعد الموقع بالذكاء الاصطناعي',
+        titleEn: 'AI Website Visitor Assistant',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'ذكاء اصطناعي وواجهات API',
+        year: '2026',
+        desc: 'مساعد ذكي للزوار للإجابة عن الأسئلة حول المهارات والمشاريع. يتصل بـ Gemini من خلال API على Vercel حتى تظل مفاتيح الخدمة في الخادم.',
+        features: [
+          { icon: '💬', title: 'محادثة مع الزوار', desc: 'إرسال الأسئلة واستقبال الإجابات داخل الموقع.' },
+          { icon: '🛡️', title: 'حماية مفاتيح الخدمة', desc: 'تمرير الطلبات عبر API على الخادم بدلاً من تضمين المفتاح في المتصفح.' },
+          { icon: '📚', title: 'أسئلة الموقع', desc: 'الإجابة عن معلومات السيرة الذاتية والمشاريع المنشورة.' }
+        ],
+        tech: [
+          { icon: '🤖', name: 'Gemini API', role: 'توليد الردود للمحادثة' },
+          { icon: '▲', name: 'Vercel Functions', role: 'استضافة API وحماية المفاتيح' },
+          { icon: '⚡', name: 'JavaScript', role: 'واجهة المحادثة وإرسال الطلبات' }
+        ],
+        codeFile: 'api/chat.js',
+        code: `const response = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ messages, assistant: 'portfolio' })
+});
+if (!response.ok) {
+  throw new Error('تعذر الاتصال بالمساعد');
+}
+const { reply } = await response.json();`,
+        metrics: [
+          { val: 'Chat', lbl: 'واجهة محادثة' },
+          { val: 'API', lbl: 'خدمة خلفية' },
+          { val: 'Secure', lbl: 'مفتاح بالخادم' },
+          { val: 'Gemini', lbl: 'نموذج الذكاء الاصطناعي' }
+        ]
+      },
+      {
+        id: 11,
+        demoId: 'demo-dashboard',
+        slug: 'interactive-dashboard',
+        emoji: '📊',
+        titleAr: 'لوحة تحكم تفاعلية',
+        titleEn: 'Interactive Analytics Dashboard',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'واجهات البيانات والتصور البصري',
+        year: '2026',
+        desc: 'لوحة تحكم بتصميم واضح لعرض الإحصائيات والرسوم البيانية التفاعلية. معاينة الصفحة تستخدم مجموعة بيانات توضيحية قابلة للتبديل.',
+        features: [
+          { icon: '📈', title: 'مؤشرات إحصائية', desc: 'عرض بطاقات تلخص المؤشرات الرئيسية.' },
+          { icon: '📊', title: 'رسوم تفاعلية', desc: 'استعراض قيم البيانات عبر مخطط قابل للتبديل.' },
+          { icon: '🗓️', title: 'تغيير الفترة', desc: 'التبديل بين مجموعات بيانات توضيحية لفترات مختلفة.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة عناصر لوحة التحكم' },
+          { icon: '🎨', name: 'CSS', role: 'تنسيق البطاقات والمخططات' },
+          { icon: '⚡', name: 'JavaScript', role: 'تحديث البيانات والتفاعل مع الرسم' }
+        ],
+        codeFile: 'dashboard.js',
+        code: `function renderBars(values, container) {
+  container.replaceChildren(...values.map(value => {
+    const bar = document.createElement('div');
+    bar.className = 'chart-bar';
+    bar.style.height = value + '%';
+    bar.setAttribute('aria-label', value + '%');
+    return bar;
+  }));
+}`,
+        metrics: [
+          { val: 'Stats', lbl: 'مؤشرات' },
+          { val: 'Charts', lbl: 'رسوم تفاعلية' },
+          { val: 'Filters', lbl: 'فترات عرض' },
+          { val: 'Demo', lbl: 'بيانات توضيحية' }
+        ]
+      },
+      {
+        id: 12,
+        demoId: 'demo-lumina',
+        demoUrl: 'projects/lumina/index.html',
+        slug: 'lumina-tech-store',
+        emoji: '🎧',
+        titleAr: 'متجر Lumina للإلكترونيات',
+        titleEn: 'Lumina Premium Tech Store',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'تجارة إلكترونية وواجهات ويب',
+        year: '2026',
+        desc: 'واجهة متجر إلكتروني عصرية لمنتجات التقنية، مرفقة بصورة سماعة Lumina Elite. تتضمن المعاينة قائمة منتجات وفلاتر وسلة تجريبية تحفظ بياناتها محلياً؛ لا يوجد دفع إلكتروني أو طلبات حقيقية.',
+        features: [
+          { icon: '🎧', title: 'واجهة متجر متناسقة', desc: 'صفحة متجر مستقلة بتصميم فاتح وصورة رئيسية مرفقة.' },
+          { icon: '🔎', title: 'تصفية المنتجات', desc: 'عرض المنتجات حسب فئات المتجر.' },
+          { icon: '🛒', title: 'سلة مشتريات محلية', desc: 'إضافة المنتجات وتعديل الكميات وحفظ السلة بهذا المتصفح.' },
+          { icon: '🧪', title: 'تجربة توضيحية', desc: 'الأسعار والمنتجات تجريبية، ولا تتم أي عملية دفع.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة صفحة المتجر' },
+          { icon: '🎨', name: 'CSS', role: 'تنسيق المتجر والبطاقات' },
+          { icon: '⚡', name: 'JavaScript', role: 'المنتجات والفلاتر والسلة' },
+          { icon: '💾', name: 'LocalStorage', role: 'حفظ السلة محلياً' }
+        ],
+        codeFile: 'projects/lumina/script.js',
+        code: `function addToCart(productId) {
+  cart[productId] = (cart[productId] || 0) + 1;
+  localStorage.setItem('lumina-cart', JSON.stringify(cart));
+  renderCart();
+}`,
+        metrics: [
+          { val: 'Catalog', lbl: 'كتالوج تجريبي' },
+          { val: 'Filters', lbl: 'فئات المنتجات' },
+          { val: 'Cart', lbl: 'سلة محلية' },
+          { val: 'No Payment', lbl: 'لا توجد مدفوعات' }
+        ]
+      },
+      {
+        id: 13,
+        demoId: 'demo-portfolio-backup',
+        demoUrl: 'projects/portfolio-backup/index.html',
+        slug: 'personal-portfolio-backup',
+        emoji: '👨‍💻',
+        titleAr: 'Portfolio شخصي — نسخة إضافية',
+        titleEn: 'Personal Portfolio (Alternate Version)',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'مواقع شخصية وتصميم متجاوب',
+        year: '2026',
+        desc: 'نسخة مستقلة باللغة الإنجليزية من موقع Portfolio، تضم أقسام النبذة والمهارات والتعليم والتواصل، مع الصورة الشخصية المرفقة وتأثيرات وتنسيق متجاوب.',
+        features: [
+          { icon: '👤', title: 'نبذة شخصية', desc: 'قسم تعريفي وهدف مهني ضمن صفحة مستقلة.' },
+          { icon: '🧰', title: 'المهارات والتعليم', desc: 'أقسام لعرض المهارات والخلفية التعليمية كما في الملفات المرفقة.' },
+          { icon: '📱', title: 'تصميم متجاوب', desc: 'واجهة تتكيف مع أحجام الشاشات المختلفة.' },
+          { icon: '✨', title: 'تفاعلات واجهة', desc: 'قائمة تنقل للجوال وتمرير سلس وتأثيرات ظهور أثناء التصفح.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة أقسام Portfolio' },
+          { icon: '🎨', name: 'CSS', role: 'التصميم والتجاوب والحركات' },
+          { icon: '⚡', name: 'JavaScript', role: 'القائمة والتنقل والتأثيرات' }
+        ],
+        codeFile: 'projects/portfolio-backup/script.js',
+        code: `document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', event => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});`,
+        metrics: [
+          { val: 'Responsive', lbl: 'تصميم متجاوب' },
+          { val: 'Sections', lbl: 'أقسام تعريفية' },
+          { val: 'Motion', lbl: 'تأثيرات تمرير' },
+          { val: 'Standalone', lbl: 'صفحة مستقلة' }
+        ]
       }
     ];
 
@@ -343,7 +670,7 @@ class ChestXRayClassifier(nn.Module):
       { id: 240105, name: 'نور الدين مصطفى', major: 'علوم حاسب', level: 'المستوى الأول', gpa: 3.50 }
     ];
 
-    // Current Active Project Index (0 to 5)
+    // Current active project index.
     let currentProjectIndex = 0;
 
     // ===== RENDER PROJECT FUNCTION =====
@@ -360,18 +687,20 @@ class ChestXRayClassifier(nn.Module):
       document.getElementById('heroCategory').textContent = p.category;
       document.getElementById('heroYear').textContent = p.year;
       document.getElementById('heroDesc').textContent = p.desc;
+      const standaloneLink = document.getElementById('openProjectDemo');
+      standaloneLink.style.display = p.demoUrl ? 'inline-flex' : 'none';
+      standaloneLink.href = p.demoUrl || '#';
 
       const statusEl = document.getElementById('heroStatus');
       statusEl.className = 'status-pill ' + p.status;
       statusEl.textContent = p.statusText;
 
-      // Toggle Live Demo Containers
-      document.getElementById('demo-student-system').style.display = (index === 0) ? 'block' : 'none';
-      document.getElementById('demo-ai-chatbot').style.display = (index === 1) ? 'flex' : 'none';
-      document.getElementById('demo-portfolio').style.display = (index === 2) ? 'block' : 'none';
-      document.getElementById('demo-face-recognition').style.display = (index === 3) ? 'block' : 'none';
-      document.getElementById('demo-real-estate').style.display = (index === 4) ? 'block' : 'none';
-      document.getElementById('demo-medical-ai').style.display = (index === 5) ? 'block' : 'none';
+      // Show the preview associated with this project's unique demo identifier.
+      document.querySelectorAll('[data-project-demo]').forEach(demo => {
+        demo.style.display = demo.dataset.projectDemo === p.demoId
+          ? (demo.id === 'demo-ai-chatbot' ? 'flex' : 'block')
+          : 'none';
+      });
 
       // Render Features
       const featuresGrid = document.getElementById('featuresCardsGrid');
@@ -770,6 +1099,346 @@ class ChestXRayClassifier(nn.Module):
       }
     }
 
+    // ===== ADDITIONAL PROJECT DEMOS =====
+    const STORE_PRODUCTS = [
+      { id: 'headphones', name: 'سماعة لاسلكية', category: 'electronics', categoryName: 'إلكترونيات', price: 1850, icon: '🎧' },
+      { id: 'keyboard', name: 'لوحة مفاتيح ميكانيكية', category: 'electronics', categoryName: 'إلكترونيات', price: 2400, icon: '⌨️' },
+      { id: 'watch', name: 'ساعة ذكية', category: 'accessories', categoryName: 'إكسسوارات', price: 3200, icon: '⌚' },
+      { id: 'backpack', name: 'حقيبة يومية', category: 'accessories', categoryName: 'إكسسوارات', price: 850, icon: '🎒' },
+      { id: 'lamp', name: 'مصباح مكتبي', category: 'home', categoryName: 'منزل', price: 620, icon: '💡' },
+      { id: 'mug', name: 'كوب حراري', category: 'home', categoryName: 'منزل', price: 380, icon: '☕' }
+    ];
+    let storeCart = {};
+    let todoItems = [];
+
+    function setDemoStatus(id, message) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = message;
+    }
+
+    function readDemoStorage(key, fallback, statusId) {
+      try {
+        const stored = localStorage.getItem(key);
+        return stored === null ? fallback : JSON.parse(stored);
+      } catch (error) {
+        console.error(`Unable to read ${key} from local storage:`, error);
+        setDemoStatus(statusId, 'تعذر قراءة البيانات المحفوظة من المتصفح.');
+        return fallback;
+      }
+    }
+
+    function saveDemoStorage(key, value, statusId) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+      } catch (error) {
+        console.error(`Unable to save ${key} to local storage:`, error);
+        setDemoStatus(statusId, 'تعذر حفظ البيانات. تحقق من إعدادات التخزين في المتصفح.');
+        return false;
+      }
+    }
+
+    function renderStore() {
+      const category = document.getElementById('storeCategory').value;
+      const maxPrice = Number(document.getElementById('storeMaxPrice').value);
+      document.getElementById('storeMaxPriceLabel').textContent = maxPrice.toLocaleString('ar-EG');
+      const products = STORE_PRODUCTS.filter(product =>
+        (category === 'all' || product.category === category) && product.price <= maxPrice
+      );
+      const container = document.getElementById('storeProductsGrid');
+      container.replaceChildren();
+
+      products.forEach(product => {
+        const card = document.createElement('article');
+        card.className = 'store-product';
+        const icon = document.createElement('div');
+        icon.className = 'store-product-icon';
+        icon.textContent = product.icon;
+        const name = document.createElement('h4');
+        name.textContent = product.name;
+        const categoryLabel = document.createElement('p');
+        categoryLabel.textContent = product.categoryName;
+        const price = document.createElement('div');
+        price.className = 'store-product-price';
+        price.textContent = `${product.price.toLocaleString('ar-EG')} ج.م`;
+        const addButton = document.createElement('button');
+        addButton.type = 'button';
+        addButton.className = 'btn-action-primary';
+        addButton.textContent = 'أضف للسلة';
+        addButton.addEventListener('click', () => {
+          storeCart[product.id] = (storeCart[product.id] || 0) + 1;
+          const saved = saveDemoStorage('portfolio-demo-store-cart', storeCart, 'storeStatus');
+          renderStoreCart();
+          if (saved) setDemoStatus('storeStatus', 'تمت إضافة المنتج إلى السلة المحلية.');
+        });
+        card.append(icon, name, categoryLabel, price, addButton);
+        container.appendChild(card);
+      });
+      if (products.length === 0) setDemoStatus('storeStatus', 'لا توجد منتجات مطابقة للفلاتر الحالية.');
+    }
+
+    function renderStoreCart() {
+      const entries = Object.entries(storeCart)
+        .filter(([id, quantity]) => STORE_PRODUCTS.some(product => product.id === id) && Number.isInteger(quantity) && quantity > 0);
+      const itemCount = entries.reduce((sum, [, quantity]) => sum + quantity, 0);
+      const total = entries.reduce((sum, [id, quantity]) => {
+        const product = STORE_PRODUCTS.find(item => item.id === id);
+        return sum + product.price * quantity;
+      }, 0);
+      document.getElementById('storeCartSummary').textContent =
+        `السلة: ${itemCount.toLocaleString('ar-EG')} منتجات · ${total.toLocaleString('ar-EG')} ج.م`;
+    }
+
+    function renderTodos() {
+      const container = document.getElementById('todoList');
+      container.replaceChildren();
+      todoItems.forEach(item => {
+        const row = document.createElement('div');
+        row.className = `todo-item${item.done ? ' done' : ''}`;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = item.done;
+        checkbox.setAttribute('aria-label', `تحديد إنجاز: ${item.title}`);
+        checkbox.dataset.todoAction = 'toggle';
+        checkbox.dataset.todoId = String(item.id);
+        const title = document.createElement('span');
+        title.className = 'todo-item-title';
+        title.textContent = item.title;
+        const priority = document.createElement('span');
+        priority.className = 'todo-priority';
+        priority.textContent = item.priority;
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.textContent = 'تعديل';
+        edit.dataset.todoAction = 'edit';
+        edit.dataset.todoId = String(item.id);
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = 'حذف';
+        remove.dataset.todoAction = 'delete';
+        remove.dataset.todoId = String(item.id);
+        row.append(checkbox, title, priority, edit, remove);
+        container.appendChild(row);
+      });
+      document.getElementById('todoCount').textContent = `${todoItems.length.toLocaleString('ar-EG')} مهمة`;
+      if (todoItems.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'extra-demo-status';
+        empty.textContent = 'لا توجد مهام بعد. أضف أول مهمة من الحقل أعلاه.';
+        container.appendChild(empty);
+      }
+    }
+
+    function getWeatherDescription(code) {
+      if (code === 0) return 'سماء صافية';
+      if ([1, 2, 3].includes(code)) return 'غائم جزئيًا';
+      if ([45, 48].includes(code)) return 'ضباب';
+      if ([51, 53, 55, 56, 57].includes(code)) return 'رذاذ';
+      if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return 'أمطار';
+      if ([71, 73, 75, 77, 85, 86].includes(code)) return 'ثلوج';
+      if ([95, 96, 99].includes(code)) return 'عواصف رعدية';
+      return 'حالة جوية متغيرة';
+    }
+
+    async function searchWeather(city) {
+      const button = document.getElementById('weatherSearchButton');
+      const result = document.getElementById('weatherResult');
+      button.disabled = true;
+      result.hidden = true;
+      setDemoStatus('weatherStatus', 'جارٍ البحث عن المدينة وتحميل بيانات الطقس...');
+      try {
+        const geoUrl = new URL('https://geocoding-api.open-meteo.com/v1/search');
+        geoUrl.search = new URLSearchParams({ name: city, count: '1', language: 'ar', format: 'json' });
+        const geoResponse = await fetch(geoUrl);
+        if (!geoResponse.ok) throw new Error('تعذر الاتصال بخدمة البحث عن المدن.');
+        const geoData = await geoResponse.json();
+        const location = geoData.results && geoData.results[0];
+        if (!location) {
+          setDemoStatus('weatherStatus', 'لم نعثر على هذه المدينة. تحقق من الاسم وحاول مجددًا.');
+          return;
+        }
+
+        const forecastUrl = new URL('https://api.open-meteo.com/v1/forecast');
+        forecastUrl.search = new URLSearchParams({
+          latitude: String(location.latitude),
+          longitude: String(location.longitude),
+          current: 'temperature_2m,relative_humidity_2m,apparent_temperature,weather_code',
+          daily: 'weather_code,temperature_2m_max,temperature_2m_min',
+          timezone: 'auto',
+          forecast_days: '5'
+        });
+        const forecastResponse = await fetch(forecastUrl);
+        if (!forecastResponse.ok) throw new Error('تعذر تحميل بيانات الطقس حاليًا.');
+        const data = await forecastResponse.json();
+        const current = data.current;
+        result.replaceChildren();
+        const summary = document.createElement('div');
+        summary.className = 'weather-current';
+        [
+          [`${location.name}${location.country ? `، ${location.country}` : ''}`, getWeatherDescription(current.weather_code)],
+          ['درجة الحرارة', `${Math.round(current.temperature_2m)}°م`],
+          ['المحسوسة', `${Math.round(current.apparent_temperature)}°م`],
+          ['الرطوبة', `${current.relative_humidity_2m}%`]
+        ].forEach(([label, value]) => {
+          const item = document.createElement('div');
+          item.className = 'dashboard-stat';
+          const name = document.createElement('span');
+          name.textContent = label;
+          const reading = document.createElement('strong');
+          reading.textContent = value;
+          item.append(name, reading);
+          summary.appendChild(item);
+        });
+        result.appendChild(summary);
+        const forecast = document.createElement('div');
+        forecast.className = 'weather-current';
+        data.daily.time.forEach((date, index) => {
+          const day = document.createElement('div');
+          day.className = 'weather-day';
+          const dateLabel = new Date(`${date}T12:00:00`).toLocaleDateString('ar-EG', { weekday: 'short', day: 'numeric' });
+          day.append(document.createTextNode(dateLabel));
+          const condition = document.createElement('strong');
+          condition.textContent = getWeatherDescription(data.daily.weather_code[index]);
+          const temperatures = document.createElement('div');
+          temperatures.textContent = `${Math.round(data.daily.temperature_2m_min[index])}° / ${Math.round(data.daily.temperature_2m_max[index])}°`;
+          day.append(condition, temperatures);
+          forecast.appendChild(day);
+        });
+        result.appendChild(forecast);
+        result.hidden = false;
+        setDemoStatus('weatherStatus', 'بيانات الطقس مقدمة مباشرة من Open-Meteo.');
+      } catch (error) {
+        console.error('Weather lookup failed:', error);
+        setDemoStatus('weatherStatus', error instanceof TypeError
+          ? 'تعذر الاتصال بخدمة الطقس. تحقق من اتصال الإنترنت وحاول مجددًا.'
+          : (error.message || 'حدث خطأ أثناء تحميل بيانات الطقس.'));
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    const DASHBOARD_DATA = {
+      month: {
+        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+        visits: [42, 64, 51, 78, 60, 92],
+        visitors: 1840, orders: 128, revenue: 24500
+      },
+      week: {
+        labels: ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'],
+        visits: [38, 66, 53, 82, 71, 95, 59],
+        visitors: 426, orders: 31, revenue: 5820
+      }
+    };
+
+    function renderDashboard(period) {
+      const data = DASHBOARD_DATA[period];
+      document.getElementById('dashboardVisitors').textContent = data.visitors.toLocaleString('ar-EG');
+      document.getElementById('dashboardOrders').textContent = data.orders.toLocaleString('ar-EG');
+      document.getElementById('dashboardRevenue').textContent = `${data.revenue.toLocaleString('ar-EG')} ج.م`;
+      const chart = document.getElementById('dashboardChart');
+      chart.replaceChildren();
+      data.visits.forEach((value, index) => {
+        const bar = document.createElement('button');
+        bar.type = 'button';
+        bar.className = 'dashboard-bar';
+        bar.setAttribute('aria-label', `${data.labels[index]}: ${value} زيارة توضيحية`);
+        const fill = document.createElement('span');
+        fill.style.height = `${Math.max(10, Math.round(value / Math.max(...data.visits) * 145))}px`;
+        const label = document.createElement('small');
+        label.textContent = data.labels[index];
+        bar.append(fill, label);
+        bar.addEventListener('click', () => {
+          chart.querySelectorAll('.dashboard-bar').forEach(item => item.classList.remove('active'));
+          bar.classList.add('active');
+          setDemoStatus('dashboardStatus', `${data.labels[index]}: ${value} زيارة توضيحية.`);
+        });
+        chart.appendChild(bar);
+      });
+    }
+
+    function initializeExtraDemos() {
+      const storedCart = readDemoStorage('portfolio-demo-store-cart', {}, 'storeStatus');
+      if (storedCart && typeof storedCart === 'object' && !Array.isArray(storedCart)) {
+        storeCart = Object.fromEntries(Object.entries(storedCart).filter(([id, count]) =>
+          STORE_PRODUCTS.some(product => product.id === id) && Number.isInteger(count) && count > 0
+        ));
+      }
+      const storedTodos = readDemoStorage('portfolio-demo-todos', [], 'todoStatus');
+      if (Array.isArray(storedTodos)) {
+        todoItems = storedTodos.filter(item => item && Number.isFinite(item.id) && typeof item.title === 'string')
+          .map(item => ({ id: item.id, title: item.title, priority: ['عادية', 'مهمة', 'عاجلة'].includes(item.priority) ? item.priority : 'عادية', done: Boolean(item.done) }));
+      }
+
+      document.getElementById('storeCategory').addEventListener('change', renderStore);
+      document.getElementById('storeMaxPrice').addEventListener('input', renderStore);
+      document.getElementById('clearStoreCart').addEventListener('click', () => {
+        storeCart = {};
+        const saved = saveDemoStorage('portfolio-demo-store-cart', storeCart, 'storeStatus');
+        renderStoreCart();
+        if (saved) setDemoStatus('storeStatus', 'تم إفراغ السلة.');
+      });
+      renderStore();
+      renderStoreCart();
+
+      document.getElementById('todoForm').addEventListener('submit', event => {
+        event.preventDefault();
+        const titleInput = document.getElementById('todoTitle');
+        const title = titleInput.value.trim();
+        if (!title) return;
+        todoItems.unshift({
+          id: Date.now() + Math.random(),
+          title,
+          priority: document.getElementById('todoPriority').value,
+          done: false
+        });
+        const saved = saveDemoStorage('portfolio-demo-todos', todoItems, 'todoStatus');
+        renderTodos();
+        titleInput.value = '';
+        if (saved) setDemoStatus('todoStatus', 'تمت إضافة المهمة.');
+        titleInput.focus();
+      });
+      document.getElementById('todoList').addEventListener('change', event => {
+        const target = event.target;
+        if (!target.matches('[data-todo-action="toggle"]')) return;
+        const item = todoItems.find(todo => String(todo.id) === target.dataset.todoId);
+        if (!item) return;
+        item.done = target.checked;
+        const saved = saveDemoStorage('portfolio-demo-todos', todoItems, 'todoStatus');
+        renderTodos();
+        if (saved) setDemoStatus('todoStatus', item.done ? 'تم تحديد المهمة كمكتملة.' : 'تمت إعادة فتح المهمة.');
+      });
+      document.getElementById('todoList').addEventListener('click', event => {
+        const button = event.target.closest('[data-todo-action="edit"], [data-todo-action="delete"]');
+        if (!button) return;
+        const item = todoItems.find(todo => String(todo.id) === button.dataset.todoId);
+        if (!item) return;
+        if (button.dataset.todoAction === 'delete') {
+          todoItems = todoItems.filter(todo => todo.id !== item.id);
+          setDemoStatus('todoStatus', 'تم حذف المهمة.');
+        } else {
+          const editedTitle = window.prompt('اكتب نص المهمة الجديد:', item.title);
+          if (editedTitle === null) return;
+          if (!editedTitle.trim()) {
+            setDemoStatus('todoStatus', 'لم يتم التعديل: نص المهمة لا يمكن أن يكون فارغًا.');
+            return;
+          }
+          item.title = editedTitle.trim();
+          setDemoStatus('todoStatus', 'تم تعديل المهمة.');
+        }
+        saveDemoStorage('portfolio-demo-todos', todoItems, 'todoStatus');
+        renderTodos();
+      });
+      renderTodos();
+
+      document.getElementById('weatherForm').addEventListener('submit', event => {
+        event.preventDefault();
+        const city = document.getElementById('weatherCity').value.trim();
+        if (city) searchWeather(city);
+      });
+      document.getElementById('dashboardPeriod').addEventListener('change', event => renderDashboard(event.target.value));
+      renderDashboard('month');
+    }
+
     function copyActiveCode() {
       const code = PROJECTS_DATA[currentProjectIndex].code;
       navigator.clipboard.writeText(code).then(() => {
@@ -780,6 +1449,7 @@ class ChestXRayClassifier(nn.Module):
     // ===== INITIALIZE PAGE WITH URL PARAM / HASH =====
     window.addEventListener('DOMContentLoaded', () => {
       renderStudentsTable();
+      initializeExtraDemos();
 
       const params = new URLSearchParams(window.location.search);
       let targetIndex = 0;

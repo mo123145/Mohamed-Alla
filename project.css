@@ -274,6 +274,12 @@
       color: #fbbf24;
     }
 
+    .status-pill.new {
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      color: #67e8f9;
+    }
+
     .category-pill {
       background: rgba(124, 58, 237, 0.12);
       border: 1px solid rgba(124, 58, 237, 0.3);
@@ -431,6 +437,169 @@
       border-radius: 16px;
       padding: 24px;
       box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .extra-demo {
+      background: #0d0d18;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .extra-demo-heading, .extra-demo-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .extra-demo-heading h3 { color: var(--text-primary); font-size: 19px; }
+    .extra-demo-heading p, .extra-demo-status { color: var(--text-muted); font-size: 13px; }
+    .extra-demo-total {
+      padding: 9px 14px;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 12px;
+      background: rgba(124, 58, 237, 0.12);
+      color: #c4b5fd;
+      font-weight: 700;
+    }
+    .extra-demo-toolbar label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    .extra-demo-toolbar input[type="range"] { accent-color: #7c3aed; }
+    .extra-demo-grow { flex: 1; }
+    .extra-demo-input {
+      min-width: 180px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      font: inherit;
+    }
+    .store-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+    }
+    .store-product, .todo-item, .dashboard-stat {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+    .store-product { padding: 16px; }
+    .store-product-icon { font-size: 32px; }
+    .store-product h4 { margin: 8px 0 4px; color: var(--text-primary); }
+    .store-product p { margin-bottom: 10px; color: var(--text-muted); font-size: 12px; }
+    .store-product-price { margin-bottom: 12px; color: #67e8f9; font-weight: 800; }
+    .todo-list { display: grid; gap: 10px; }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+    }
+    .todo-item-title { flex: 1; color: var(--text-primary); overflow-wrap: anywhere; }
+    .todo-item.done .todo-item-title { color: var(--text-muted); text-decoration: line-through; }
+    .todo-priority { color: #fbbf24; font-size: 12px; }
+    .todo-item button {
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .weather-current {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .weather-day {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .weather-day strong { display: block; margin-top: 6px; color: var(--text-primary); }
+    .dashboard-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .dashboard-stat { display: grid; gap: 6px; padding: 16px; color: var(--text-muted); }
+    .dashboard-stat strong { color: var(--text-primary); font-size: 21px; }
+    .dashboard-chart {
+      display: flex;
+      min-height: 220px;
+      align-items: flex-end;
+      justify-content: space-around;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .dashboard-bar {
+      display: flex;
+      width: 100%;
+      max-width: 68px;
+      min-height: 36px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 7px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .dashboard-bar span {
+      width: 100%;
+      min-height: 8px;
+      border-radius: 8px 8px 2px 2px;
+      background: linear-gradient(180deg, #06b6d4, #7c3aed);
+    }
+    .dashboard-bar.active span { filter: brightness(1.35); }
+    .standalone-preview {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+    }
+    .standalone-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 18px;
+      background: var(--bg-card);
+    }
+    .standalone-preview-header h3 {
+      color: var(--text-primary);
+      font-size: 17px;
+    }
+    .standalone-preview-header p {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .standalone-preview iframe {
+      display: block;
+      width: 100%;
+      height: 780px;
+      border: 0;
+      background: #fff;
     }
 
     .demo-toolbar {
@@ -1566,5 +1735,30 @@
       }
       .content-section {
         padding: 24px 20px;
+      }
+      .extra-demo {
+        padding: 18px 14px;
+      }
+      .extra-demo-toolbar {
+        align-items: stretch;
+      }
+      .extra-demo-toolbar label {
+        justify-content: space-between;
+      }
+      .extra-demo-grow, .extra-demo-input {
+        width: 100%;
+      }
+      .todo-item {
+        flex-wrap: wrap;
+      }
+      .dashboard-chart {
+        gap: 5px;
+        padding: 12px 6px;
+      }
+      .standalone-preview iframe {
+        height: 680px;
+      }
+      .dashboard-bar small {
+        font-size: 10px;
       }
     }

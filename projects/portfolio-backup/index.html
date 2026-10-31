@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio | Mohamed Alaa Eldin</title>
+    <meta name="description" content="Professional portfolio showcasing skills, experience, and education">
+
+    <!-- Google Fonts: Inter for English text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Enhanced hero image: larger circular avatar with 3D tilt and smoother lift on hover */
+        .hero-image .img-placeholder{
+            width: 280px;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(2,6,23,0.15);
+            border: 4px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: #f8fafc;
+            transition: box-shadow 0.35s ease, transform 0.45s cubic-bezier(.2,.8,.2,1);
+            transform-style: preserve-3d;
+            perspective: 1200px;
+        }
+        .hero-image .img-placeholder img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s cubic-bezier(.2,.8,.2,1), filter 0.35s ease;
+            will-change: transform;
+            transform-origin: 50% 50%;
+        }
+        .hero-image .img-placeholder:hover{
+            box-shadow: 0 28px 60px rgba(2,6,23,0.28);
+            transform: translateY(-14px) rotate(-3deg);
+            cursor: pointer;
+        }
+        .hero-image .img-placeholder:hover img{
+            transform: scale(1.08) rotateX(6deg) rotateY(-6deg);
+            filter: saturate(1.03);
+        }
+
+        /* focus for keyboard accessibility */
+        .hero-image .img-placeholder:focus{ outline: none; transform: translateY(-14px) rotate(-3deg); }
+
+        /* Small screens: reduce avatar size */
+        @media (max-width: 600px){
+            .hero-image .img-placeholder{ width: 200px; height: 200px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Mohamed Alaa Eldin</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="greeting">Hello, I'm</span>
+                <h1 class="name">Mohamed Alaa Eldin Mohamed Sayed</h1>
+                <p class="role">Software Engineer</p>
+                <p class="hero-description">
+                    A passionate Software Engineer dedicated to designing and developing efficient and user-friendly
+                    software solutions.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Contact Me</a>
+                    <a href="#about" class="btn btn-secondary">More About Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="img-placeholder">
+                    <img src="moh.jpeg" alt="Mohamed Alaa Eldin">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Career Goal / Personal Intro Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-card">
+                    <i class="fas fa-bullseye icon"></i>
+                    <h3>Career Objective</h3>
+                    <p>
+                        Seeking to develop my skills in web development and work on practical projects that help me gain
+                        extensive experience in this field, while keeping up with the latest technologies and tools.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-user icon"></i>
+                    <h3>Personal Profile</h3>
+                    <p>
+                        I have a strong foundation in programming concepts and software engineering, and I am constantly
+                        seeking to enhance my technical skills and keep up with the latest technologies. I excel in
+                        analyzing problems and turning them into practical solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3>C++</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 5px;">Object-oriented programming and data analysis</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-cuttlefish"></i></div>
+                    <h3>C#</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 5px;">Application development and software programming</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <h3>HTML</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 5px;">Building the structure of web pages</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <h3>CSS</h3>
+                    <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 5px;">User interface styling and design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education and Certifications Section -->
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+
+            <div class="timeline">
+                <!-- Education Item -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Computers and Artificial Intelligence</h3>
+                        <span class="date">2nd Year Student</span>
+                        <h4>Minya National University</h4>
+                        <p>Student of programming fundamentals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>moh384684@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>01029684334</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Egypt</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <p id="contactNotice" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Designed by &copy; 2024 Mohamed Alaa Eldin. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

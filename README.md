@@ -37,3 +37,12 @@ but is instructed to distinguish those answers from verified project details.
 
 The shared assistant conversation is retained for the current browser session
 while navigating between the CV and project pages.
+
+The project pages include interactive browser demos for the store and task list
+(saved locally in the browser), a weather lookup using Open-Meteo, and a
+dashboard populated with illustrative sample data. The store is a preview only
+and does not accept payments.
+
+Two supplied standalone projects are available under `projects/lumina/` and
+`projects/portfolio-backup/`. Lumina's product catalog and cart are a local
+demo only; the checkout button does not process payments.

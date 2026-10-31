@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina | Premium Tech Store</title>
+    <meta name="description" content="Discover premium gadgets and accessories at Lumina Store.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Lumina<span>.</span></a>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#products">Shop</a>
+                <a href="#products">New Arrivals</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn" id="cartBtn" type="button" aria-label="Open shopping cart" aria-expanded="false">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-wrapper">
+            <div class="hero-content">
+                <h1>Experience Sound <br>Like Never Before.</h1>
+                <p>Immerse yourself in crystal clear audio with our new Lumina Elite Series headphones. Engineered for
+                    perfection.</p>
+                <div class="flex gap-4">
+                    <button class="btn-primary"
+                        onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Shop
+                        Now</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="headphones.png" alt="Lumina Elite Headphones">
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trending Products</h2>
+                <div class="filters" id="categoryFilters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="audio">Audio</button>
+                    <button class="filter-btn" data-category="wearables">Wearables</button>
+                    <button class="filter-btn" data-category="accessories">Accessories</button>
+                </div>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Lumina.</h3>
+                    <p style="color: #94a3b8;">Premium tech essentials for the modern lifestyle.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">All Products</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Featured</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <div class="flex gap-4">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Lumina Store. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-overlay-bg" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+        <div class="cart-header">
+            <h3 id="cartTitle">Your Cart</h3>
+            <button id="closeCart" type="button" aria-label="Close cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart Items -->
+            <p style="color: #94a3b8; text-align: center; margin-top: 2rem;">Your cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="flex justify-between" style="margin-bottom: 1rem; font-weight: 700;">
+                <span>Total</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <p id="cartMessage" role="status" aria-live="polite" style="margin-bottom: 0.75rem; color: #64748b;"></p>
+            <button class="btn-primary" id="checkoutBtn" type="button" style="width: 100%;">Checkout (Demo)</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
