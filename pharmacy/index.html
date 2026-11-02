@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="صيدلية الشفاء الذكية - منصة صيدلانية متكاملة لجميع الأدوية والمستلزمات الطبية مع خدمة البحث الذكي، فحص التفاعلات الدوائية، حاسبة الجرعات، وتوصيل سريع للروشتات على مدار الساعة.">
+    <meta name="keywords" content="صيدلية, أدوية, روشتة, مسكنات, مضادات حيوية, فيتامينات, بدائل الأدوية, استشارة صيدلي, توصيل أدوية">
+    <title>صيدلية الشفاء الذكية | دليلك الشامل لجميع الأدوية والمستلزمات الطبية</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. Top Emergency & Notification Bar -->
+    <div class="top-notification-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <span class="top-bar-item">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    توصيل مجاني للطلبات فوق 150 ج.م
+                </span>
+                <span class="top-bar-item">
+                    <span class="pulse-badge"><i class="fa-solid fa-bolt"></i> متاح الآن</span>
+                    صيدلي مناوب متاح للاستشارات 24/7
+                </span>
+            </div>
+            <div class="top-bar-right">
+                <span class="top-bar-item">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    الخط الساخن للطوارئ: <strong>19999</strong>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-logo" onclick="resetAllFilters()">
+                <div class="logo-icon-wrapper">
+                    <i class="fa-solid fa-staff-snake"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>صيدلية <span>الشفاء</span></h1>
+                    <span class="logo-tagline">رعايتك الصحية الذكية بين يديك</span>
+                </div>
+            </a>
+
+            <!-- Smart Search Bar -->
+            <div class="header-search-form">
+                <div class="search-input-wrap">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" 
+                           id="smartSearchInput" 
+                           class="smart-search-input" 
+                           placeholder="ابحث باسم الدواء، المادة الفعالة، أو العَرَض (مثال: بنادول، صداع، حموضة)..." 
+                           autocomplete="off">
+                    <button type="button" id="clearSearchBtn" class="clear-search-btn" title="مسح البحث">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Prescription Upload Quick Button -->
+                <button class="action-btn btn-primary" onclick="openModal('prescriptionUploadModal')" title="ارفع صورة الروشتة">
+                    <i class="fa-solid fa-file-prescription"></i>
+                    <span>ارفع روشتة</span>
+                </button>
+
+                <!-- Theme Switcher -->
+                <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="تبديل الوضع الليلي / الفاتح">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Shopping Cart Button -->
+                <button class="action-btn cart-btn" onclick="toggleCartDrawer(true)" title="عرض سلة المشتريات">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>السلة</span>
+                    <span id="cartCountBadge" class="cart-count-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Hero Section with Modern Aesthetics -->
+    <section class="hero-section">
+        <div class="hero-background-shapes">
+            <div class="shape-circle shape-1"></div>
+            <div class="shape-circle shape-2"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2>
+                    جميع الأدوية والمستلزمات الطبية <br>
+                    <span class="highlight">بأعلى معايير الأمان والسرعة</span>
+                </h2>
+                <p class="hero-description">
+                    تصفح أضخم قاعدة بيانات دوائية موثوقة، واكتشف بدائل الأدوية المتطابقة، وتحقق من أمان التفاعلات الدوائية مع خدمة التوصيل الفوري على مدار الساعة.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#catalogSection" class="hero-btn btn-accent" onclick="scrollToSection('catalogSection')">
+                        <i class="fa-solid fa-capsules"></i>
+                        تصفح جميع الأدوية
+                    </a>
+                    <button class="hero-btn btn-glass" onclick="openModal('prescriptionUploadModal')">
+                        <i class="fa-solid fa-camera"></i>
+                        صوّر الروشتة واطلب الآن
+                    </button>
+                    <button class="hero-btn btn-glass" onclick="togglePharmacistChat()">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        استشر الصيدلي مجاناً
+                    </button>
+                </div>
+
+                <!-- Hero Stats Grid -->
+                <div class="hero-stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-num">+10,000</span>
+                        <span class="stat-label">دواء ومستحضر طبي مرخص</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">30 دقيقة</span>
+                        <span class="stat-label">متوسط سرعة التوصيل</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">24 / 7</span>
+                        <span class="stat-label">صيدلي مناوب للاستشارات</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-label">أدوية أصلية مضمونة التخزين</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Graphic Quick Rx Box -->
+            <div class="hero-graphic-card">
+                <div class="rx-upload-quick-box">
+                    <div class="rx-icon-circle">
+                        <i class="fa-solid fa-file-prescription"></i>
+                    </div>
+                    <h3 class="rx-quick-title">معاك روشتة ومش عارف تقرأها؟</h3>
+                    <p class="rx-quick-desc">
+                        ارفع صورة الروشتة الطبية بضغطة واحدة، وسيتولى الصيدلي قراءتها وتجهيز أدويتك وتوصيلها فوراً لباب منزلك.
+                    </p>
+                    <button class="rx-quick-btn" onclick="openModal('prescriptionUploadModal')">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        رفع وتجهيز الروشتة فوراً
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Smart Pharmacy Clinical Tools -->
+    <section class="smart-tools-section">
+        <div class="tools-grid">
+            <!-- Drug Interaction Tool -->
+            <div class="tool-card" onclick="openModal('drugInteractionModal')">
+                <div class="tool-icon icon-interact">
+                    <i class="fa-solid fa-shield-virus"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>فاحص التفاعلات الدوائية</h3>
+                    <p>تحقق فوراً مما إذا كان هناك تعارض خطير بين أي دوائين تتناولهما معاً.</p>
+                </div>
+            </div>
+
+            <!-- Pediatric Fever Dose Calculator -->
+            <div class="tool-card" onclick="openModal('doseCalculatorModal')">
+                <div class="tool-icon icon-calc">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>حاسبة جرعات خافض الحرارة</h3>
+                    <p>احسب الجرعة الآمنة الدقيقة لخافض الحرارة والمسكن للأطفال بحسب الوزن والعمر.</p>
+                </div>
+            </div>
+
+            <!-- Generic Alternatives Finder -->
+            <div class="tool-card" onclick="openModal('alternativesGuideModal')">
+                <div class="tool-icon icon-alt">
+                    <i class="fa-solid fa-repeat"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>دليل بدائل الأدوية ومثائلها</h3>
+                    <p>ابحث عن بدائل أرخص وبنفس الفعالية والمادة الفعالة للأدوية الناقصة في السوق.</p>
+                </div>
+            </div>
+
+            <!-- Fast Prescription Delivery -->
+            <div class="tool-card" onclick="openModal('prescriptionUploadModal')">
+                <div class="tool-icon icon-rx">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>صرف وتوصيل الروشتات</h3>
+                    <p>خدمة توصيل أدوية التأمين والروشتات الشهرية للأمراض المزمنة بانتظام.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Main Catalog & Medicines Database -->
+    <main id="catalogSection" class="main-catalog-section">
+        <!-- Section Title & Sorting -->
+        <div class="catalog-header">
+            <div class="catalog-title-group">
+                <h2>
+                    <i class="fa-solid fa-pills" style="color: var(--primary);"></i>
+                    كتالوج الأدوية والمستلزمات الطبية
+                </h2>
+                <p id="resultsCount">جاري تحميل الأصناف المتاحة...</p>
+            </div>
+
+            <div class="catalog-sort-group">
+                <label for="catalogSortSelect"><i class="fa-solid fa-arrow-down-wide-short"></i> ترتيب حسب:</label>
+                <select id="catalogSortSelect" class="sort-select">
+                    <option value="popular">الأكثر طلباً ومبيعاً</option>
+                    <option value="price-low">السعر: من الأقل للأعلى</option>
+                    <option value="price-high">السعر: من الأعلى للأقل</option>
+                    <option value="name">الاسم الأبجدي (أ - ي)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="categories-filter-wrapper">
+            <div id="categoriesList" class="categories-filter-list">
+                <!-- Dynamically Populated by App.js -->
+            </div>
+        </div>
+
+        <!-- Quick Filter Tags -->
+        <div class="quick-tags-wrapper">
+            <span class="quick-tag-label"><i class="fa-solid fa-filter"></i> تصفية سريعة:</span>
+            <button class="quick-tag-pill active" data-filter="all">الكل</button>
+            <button class="quick-tag-pill" data-filter="otc"><i class="fa-solid fa-check"></i> أدوية بدون وصفة (OTC)</button>
+            <button class="quick-tag-pill" data-filter="deals"><i class="fa-solid fa-percent"></i> عروض وتخفيضات</button>
+            <button class="quick-tag-pill" data-filter="top"><i class="fa-solid fa-star"></i> الأعلى تقييماً</button>
+            <button class="quick-tag-pill" data-filter="rx"><i class="fa-solid fa-file-prescription"></i> أدوية الروشتات (Rx)</button>
+        </div>
+
+        <!-- Medicines Grid -->
+        <div id="medicinesGrid" class="medicines-grid">
+            <!-- Dynamically Populated by App.js -->
+        </div>
+    </main>
+
+    <!-- 6. Floating 24/7 AI Pharmacist Chat Widget -->
+    <button class="pharmacist-fab" onclick="togglePharmacistChat()" title="تحدث مع الصيدلي المناوب">
+        <div class="fab-avatar">
+            <i class="fa-solid fa-user-doctor"></i>
+        </div>
+        <span>صيدلي أونلاين 24/7</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="pharmacistChatWindow" class="chat-window">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <i class="fa-solid fa-user-doctor" style="font-size: 1.4rem;"></i>
+                <div>
+                    <h4>مساعد الصيدلية الذكي</h4>
+                    <span class="chat-status-badge">
+                        <span class="status-dot"></span> متصل الآن لمساعدتك
+                    </span>
+                </div>
+            </div>
+            <button class="modal-close-btn" onclick="togglePharmacistChat()" style="color: white; background: rgba(255,255,255,0.2);">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="chatMessagesContainer" class="chat-messages-area">
+            <div class="chat-msg bot">
+                <strong>مرحباً بك في صيدلية الشفاء! 👋</strong><br>
+                أنا مساعدك الصيدلاني الذكي. كيف يمكنني مساعدتك اليوم؟ يمكنك سؤالي عن دواعي استعمال دواء، الجرعات، التفاعلات، أو اقتراح علاج سريع للأعراض.
+            </div>
+        </div>
+
+        <!-- Quick Question Chips -->
+        <div class="chat-suggestions">
+            <button class="quick-chat-chip" onclick="sendQuickChatMessage('علاج سريع للصداع')">علاج الصداع</button>
+            <button class="quick-chat-chip" onclick="sendQuickChatMessage('خافض حرارة للأطفال')">حرارة طفل</button>
+            <button class="quick-chat-chip" onclick="sendQuickChatMessage('علاج المغص والقولون')">مغص وانتفاخ</button>
+            <button class="quick-chat-chip" onclick="sendQuickChatMessage('أدوية آمنة للحامل')">أدوية الحوامل</button>
+            <button class="quick-chat-chip" onclick="sendQuickChatMessage('مواعيد وشروط التوصيل')">التوصيل والشحن</button>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="pharmacistChatInput" placeholder="اكتب سؤالك الطبي أو استفسارك هنا...">
+            <button class="chat-send-btn" onclick="sendPharmacistMessage()" title="إرسال">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 7. Slide-in Shopping Cart Drawer -->
+    <div id="cartDrawerOverlay" class="cart-overlay" onclick="toggleCartDrawer(false)">
+        <div class="cart-drawer" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h3>
+                    <i class="fa-solid fa-cart-shopping" style="color: var(--primary);"></i>
+                    سلة الأدوية والمشتريات
+                </h3>
+                <button class="modal-close-btn" onclick="toggleCartDrawer(false)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Items List -->
+            <div id="cartItemsList" class="cart-items-list">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Coupon Code Section -->
+            <div style="padding: 10px 20px; background: var(--bg-alt); border-top: 1px solid var(--border-color);">
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="couponCodeInput" class="form-control" placeholder="كود الخصم (جرب: SHIFAA)" style="padding: 6px 12px; font-size: 0.85rem;">
+                    <button class="action-btn" onclick="applyCouponCode()" style="padding: 6px 14px; font-size: 0.85rem;">
+                        تطبيق
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cart Footer & Summary -->
+            <div class="cart-footer">
+                <div class="cart-summary-line">
+                    <span>المجموع الفرعي:</span>
+                    <strong id="cartSubtotal">0 ج.م</strong>
+                </div>
+                <div class="cart-summary-line">
+                    <span>رسوم التوصيل:</span>
+                    <strong id="cartShipping">0 ج.م</strong>
+                </div>
+                <div class="cart-summary-line" style="color: var(--primary);">
+                    <span>الخصم المطبق:</span>
+                    <strong id="cartDiscount">0 ج.م</strong>
+                </div>
+                <div class="cart-summary-line total-line">
+                    <span>الإجمالي المستحق:</span>
+                    <span id="cartTotal" class="amount">0 ج.م</span>
+                </div>
+
+                <button id="cartCheckoutBtn" class="checkout-btn" onclick="openCheckoutModal()">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>متابعة إتمام الطلب</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. Medicine Details & Alternatives Modal -->
+    <div id="medicineDetailsModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-prescription-bottle-medical"></i>
+                    <h3>تفاصيل الدواء والبدائل المتاحة</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('medicineDetailsModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="medicineModalContent" class="modal-body">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. Prescription Upload Modal -->
+    <div id="prescriptionUploadModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-file-prescription"></i>
+                    <h3>رفع وصرف الروشتة الطبية</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('prescriptionUploadModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="prescriptionForm" onsubmit="submitPrescriptionForm(event)">
+                    <!-- Upload Dropzone -->
+                    <div class="upload-dropzone" onclick="document.getElementById('rxFileInput').click()">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon-big"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 4px; color: var(--text-primary);">اضغط هنا لاختيار صورة الروشتة أو اسحبها إلى هنا</h4>
+                        <p id="dropzoneText" style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">يدعم صور JPG, PNG أو ملفات PDF حتى 10 ميجابايت</p>
+                        <input type="file" id="rxFileInput" accept="image/*,.pdf" style="display: none;" onchange="handlePrescriptionFile(event)" required>
+                        <img id="prescriptionPreview" class="preview-prescription-img" alt="معاينة الروشتة">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rxPhone"><i class="fa-solid fa-phone"></i> رقم الهاتف المحمول (للتواصل وتأكيد الأصناف): *</label>
+                        <input type="tel" id="rxPhone" class="form-control" placeholder="مثال: 01012345678" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rxAddress"><i class="fa-solid fa-location-dot"></i> عنوان التوصيل بالتفصيل: *</label>
+                        <input type="text" id="rxAddress" class="form-control" placeholder="المدينة، المنطقة، اسم الشارع، رقم العمارة والشقة" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rxNotes"><i class="fa-solid fa-message"></i> أي ملاحظات للصيدلي (اختياري):</label>
+                        <textarea id="rxNotes" class="form-control" rows="2" placeholder="مثال: لو دواء ناقص أحتاج بديله بنفس المادة الفعالة..."></textarea>
+                    </div>
+
+                    <button type="submit" class="checkout-btn">
+                        <i class="fa-solid fa-paper-plane"></i> إرسال الروشتة للتجهيز الفوري
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. Drug Interaction Checker Modal -->
+    <div id="drugInteractionModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-shield-virus" style="color: #ef4444;"></i>
+                    <h3>فاحص التفاعلات الدوائية (Clinical Drug Interactions)</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('drugInteractionModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+                    اختر دواءين للتحقق التلقائي من وجود أي تعارض صيدلاني أو مخاطر صحية عند تناولهما معاً:
+                </p>
+
+                <div class="form-group">
+                    <label for="interactionDrugA">الدواء الأول:</label>
+                    <select id="interactionDrugA" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="interactionDrugB">الدواء الثاني:</label>
+                    <select id="interactionDrugB" class="form-control"></select>
+                </div>
+
+                <button class="checkout-btn" onclick="checkDrugInteraction()" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                    <i class="fa-solid fa-stethoscope"></i> فحص التعارض الدوائي الآن
+                </button>
+
+                <div id="interactionResultBox"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. Children Fever Dose Calculator Modal -->
+    <div id="doseCalculatorModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-calculator" style="color: var(--secondary);"></i>
+                    <h3>حاسبة جرعات خافض الحرارة للأطفال (الباراسيتامول)</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('doseCalculatorModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+                    احسب الجرعة الطبية الآمنة والدقيقة لشراب الباراسيتامول (10-15 ملغ لكل كجم) للأطفال والرضع:
+                </p>
+
+                <div class="form-group">
+                    <label for="childWeightInput"><i class="fa-solid fa-weight-scale"></i> وزن الطفل بالكيلوجرام (الأدق طبياً):</label>
+                    <input type="number" id="childWeightInput" class="form-control" placeholder="مثال: 12 كجم" step="0.5" min="3" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="childAgeSelect"><i class="fa-solid fa-child"></i> أو اختر العمر التقريبي (إذا لم يتوفر ميزان):</label>
+                    <select id="childAgeSelect" class="form-control">
+                        <option value="0">-- اختر العمر التقريبي --</option>
+                        <option value="0.5">من 3 إلى 6 أشهر (~ 7 كجم)</option>
+                        <option value="1">سنة واحدة (~ 10 كجم)</option>
+                        <option value="2">سنتان (~ 12 كجم)</option>
+                        <option value="3">3 سنوات (~ 14 كجم)</option>
+                        <option value="4">4 سنوات (~ 16 كجم)</option>
+                        <option value="5">5 إلى 6 سنوات (~ 20 كجم)</option>
+                        <option value="8">7 إلى 9 سنوات (~ 26 كجم)</option>
+                    </select>
+                </div>
+
+                <button class="checkout-btn" onclick="calculateFeverDose()" style="background: linear-gradient(135deg, var(--secondary), #0369a1);">
+                    <i class="fa-solid fa-calculator"></i> احسب الجرعة الآمنة بالمليمتر
+                </button>
+
+                <div id="calcResultBox"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. Alternatives Guide Info Modal -->
+    <div id="alternativesGuideModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-repeat" style="color: var(--accent);"></i>
+                    <h3>دليل بدائل الأدوية (Generics & Equivalents)</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('alternativesGuideModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="background: var(--bg-alt); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
+                    <h4 style="color: var(--primary); margin-bottom: 6px;"><i class="fa-solid fa-circle-question"></i> ما هو بديل الدواء (المثيل الصيدلاني)؟</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        هو دواء تنتجه شركة صيدلانية أخرى يحتوي على <strong>نفس المادة الفعالة ونفس التركيز بنفس الكفاءة العلاجية 100%</strong>، ولكنه يباع باسم تجاري وسعر مختلف.
+                    </p>
+                </div>
+
+                <h4 style="margin-bottom: 10px; color: var(--text-primary);">أمثلة شائعة لبدائل متطابقة يمكنك طلبها فوراً:</h4>
+                <ul style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; padding-right: 18px; margin-bottom: 20px;">
+                    <li><strong>بدائل البنادول (باراسيتامول):</strong> أدول، فيفادول، نوفالدول، سيتال.</li>
+                    <li><strong>بدائل الأوجمنتين 1 جم (أموكسيسيلين + كلافولانيك):</strong> كيورام، كلافوكس، ميجاموكس، هاي بيوتك.</li>
+                    <li><strong>بدائل الكونترولوك 40 (بانتوبرازول):</strong> زوركال، بروتوفكس، بانتوزول.</li>
+                    <li><strong>بدائل الزيرتك (سيتريزين):</strong> ستراك، أرتيز، هيستازين.</li>
+                </ul>
+
+                <button class="checkout-btn" onclick="closeModal('alternativesGuideModal'); scrollToSection('catalogSection');">
+                    <i class="fa-solid fa-magnifying-glass"></i> تصفح الكتالوج واكتشف بدائل كل دواء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13. Checkout Modal -->
+    <div id="checkoutModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-truck-fast" style="color: var(--primary);"></i>
+                    <h3>إتمام الطلب وتحديد عنوان التوصيل</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('checkoutModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm" onsubmit="processOrder(event)">
+                    <div class="form-group">
+                        <label for="customerName"><i class="fa-solid fa-user"></i> اسم العميل بالكامل: *</label>
+                        <input type="text" id="customerName" class="form-control" placeholder="الاسم الأول واسم العائلة" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerPhone"><i class="fa-solid fa-phone"></i> رقم الهاتف للتوصيل: *</label>
+                        <input type="tel" id="customerPhone" class="form-control" placeholder="01xxxxxxxxx" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerAddress"><i class="fa-solid fa-map-location-dot"></i> عنوان التوصيل بالتفصيل: *</label>
+                        <input type="text" id="customerAddress" class="form-control" placeholder="المدينة، الشارع، رقم العمارة، رقم الشقة" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-wallet"></i> طريقة الدفع المفضلة:</label>
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                                <input type="radio" name="paymentMethod" value="الدفع عند الاستلام نقداً (Cash on Delivery)" checked>
+                                <span>الدفع عند الاستلام نقداً (Cash on Delivery)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                                <input type="radio" name="paymentMethod" value="الدفع ببطاقة بنكية (فيزا / ماستركارد عند الباب)">
+                                <span>الدفع ببطاقة بنكية (جهاز POS عند الباب)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                                <input type="radio" name="paymentMethod" value="محفظة إلكترونية (فودافون كاش / إنستاباي)">
+                                <span>محفظة إلكترونية (فودافون كاش / إنستاباي)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerNotes"><i class="fa-solid fa-comment-dots"></i> تعليمات خاصة للتوصيل:</label>
+                        <textarea id="customerNotes" class="form-control" rows="2" placeholder="أي علامة مميزة للعنوان أو ميعاد مفضل"></textarea>
+                    </div>
+
+                    <button type="submit" class="checkout-btn">
+                        <i class="fa-solid fa-check-circle"></i> تأكيد وإرسال الطلب الآن
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 14. Order Success & Printable Digital Invoice Modal -->
+    <div id="orderSuccessModal" class="modal-backdrop">
+        <div class="modal-dialog" style="max-width: 720px;">
+            <div class="modal-header">
+                <div class="modal-header-title">
+                    <i class="fa-solid fa-circle-check" style="color: var(--success); font-size: 1.6rem;"></i>
+                    <h3 id="successModalTitle">تم تأكيد طلبك بنجاح!</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('orderSuccessModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="successModalDesc" style="color: var(--text-secondary); margin-bottom: 20px;">
+                    شكراً لك <strong id="confirmedCustomerName"></strong>، تم إرسال طلبك رقم (<strong id="confirmedOrderNumber" style="color: var(--primary);"></strong>) إلى فرع الصيدلية الأقرب إليك، ومندوب التوصيل في طريقه إليك الآن!
+                </p>
+
+                <!-- Printable Invoice Area -->
+                <div id="invoicePrintArea" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 20px;">
+                    <!-- Invoice content will be dynamically generated by App.js -->
+                </div>
+
+                <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                    <button class="action-btn" onclick="printInvoice()">
+                        <i class="fa-solid fa-print"></i> طباعة الفاتورة الرقمية
+                    </button>
+                    <button class="action-btn btn-primary" onclick="closeModal('orderSuccessModal')">
+                        متابعة التسوق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 15. Medical Disclaimer Card -->
+    <div class="medical-disclaimer-card">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.5rem; flex-shrink: 0;"></i>
+        <div>
+            <strong>تنويه طبي هام:</strong> المعلومات الواردة في الموقع استرشادية وتثقيفية لتعريف المرضى بالأدوية والمواد الفعالة، ولا تغني بأي حال عن الفحص الطبي المتخصص أو استشارة الصيدلي المباشرة قبل تناول أي علاج.
+        </div>
+    </div>
+
+    <!-- 16. Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="brand-logo" style="margin-bottom: 14px;">
+                    <div class="logo-icon-wrapper" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                        <i class="fa-solid fa-staff-snake"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h3 style="font-size: 1.2rem; font-weight: 800;">صيدلية الشفاء الذكية</h3>
+                    </div>
+                </div>
+                <p>
+                    مؤسسة صيدلانية رائدة تقدم خدمات الرعاية الصحية وتوفير جميع الأدوية والمستلزمات الطبية بأعلى درجات الجودة والموثوقية وخدمة التوصيل السريع للمنازل.
+                </p>
+                <div style="display: flex; gap: 12px; font-size: 1.2rem; color: var(--text-secondary);">
+                    <a href="#" style="color: inherit;"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" style="color: inherit;"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" style="color: inherit;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="color: inherit;"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>الأقسام الطبية</h4>
+                <ul>
+                    <li><a href="#catalogSection" onclick="selectCategory('pain_fever')"><i class="fa-solid fa-angle-left"></i> مسكنات وخافضات حرارة</a></li>
+                    <li><a href="#catalogSection" onclick="selectCategory('antibiotics')"><i class="fa-solid fa-angle-left"></i> مضادات حيوية ومطهرات</a></li>
+                    <li><a href="#catalogSection" onclick="selectCategory('digestive')"><i class="fa-solid fa-angle-left"></i> الجهاز الهضمي والقولون</a></li>
+                    <li><a href="#catalogSection" onclick="selectCategory('chronic')"><i class="fa-solid fa-angle-left"></i> أدوية الضغط والسكر والقلب</a></li>
+                    <li><a href="#catalogSection" onclick="selectCategory('vitamins')"><i class="fa-solid fa-angle-left"></i> فيتامينات ومكملات غذائية</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="#" onclick="openModal('prescriptionUploadModal')"><i class="fa-solid fa-angle-left"></i> رفع وصرف الروشتة</a></li>
+                    <li><a href="#" onclick="openModal('drugInteractionModal')"><i class="fa-solid fa-angle-left"></i> فحص التفاعلات الدوائية</a></li>
+                    <li><a href="#" onclick="openModal('doseCalculatorModal')"><i class="fa-solid fa-angle-left"></i> حاسبة جرعات الأطفال</a></li>
+                    <li><a href="#" onclick="openModal('alternativesGuideModal')"><i class="fa-solid fa-angle-left"></i> البحث عن بدائل الأدوية</a></li>
+                    <li><a href="#" onclick="togglePharmacistChat()"><i class="fa-solid fa-angle-left"></i> استشارة صيدلي 24 ساعة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>فروعنا والتواصل</h4>
+                <ul>
+                    <li><i class="fa-solid fa-phone" style="color: var(--primary);"></i> الخط الساخن: 19999</li>
+                    <li><i class="fa-brands fa-whatsapp" style="color: var(--success);"></i> واتساب الطوارئ: 01012345678</li>
+                    <li><i class="fa-solid fa-location-dot" style="color: var(--secondary);"></i> تغطية فورية لجميع المحافظات</li>
+                    <li><i class="fa-solid fa-clock" style="color: var(--accent);"></i> مواعيد العمل: 24 ساعة طوال الأسبوع</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                © 2026 جميع الحقوق محفوظة - صيدلية الشفاء الذكية | مرخصة ومعتمدة من وزارة الصحة
+            </div>
+            <div>
+                تصميم وبرمجة منصة صيدلانية متكاملة فائقة السرعة
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="medicines-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
