@@ -1127,6 +1127,8 @@ body.dark-mode .med-badge.badge-rx { background: rgba(194, 65, 12, 0.2); color: 
     justify-content: center;
     font-size: 1.1rem;
     transition: all var(--transition-fast);
+    z-index: 10;
+    position: relative;
 }
 
 .modal-close-btn:hover {

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم والإدارة | صيدلية الشفاء الذكية</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --secondary: #0284c7;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg-main: #0b1320;
+            --bg-card: #132238;
+            --bg-card-hover: #1c2e4a;
+            --border: #233550;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .admin-top-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .brand-group h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .brand-group span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .user-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .role-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .role-admin { background: rgba(2, 132, 199, 0.2); color: #38bdf8; border: 1px solid #0284c7; }
+        .role-pharmacist { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+            background: var(--bg-card-hover);
+            color: var(--text-main);
+        }
+
+        .btn-action:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-logout {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Container & Tabs */
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Stats Cards Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stat-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .icon-sales { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .icon-orders { background: rgba(2, 132, 199, 0.15); color: #38bdf8; }
+        .icon-rx { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .icon-stock { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+        .stat-info h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 900;
+        }
+
+        /* Main Tabs */
+        .tabs-nav {
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: var(--bg-card-hover);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-content-panel {
+            display: none;
+        }
+
+        .tab-content-panel.active {
+            display: block;
+        }
+
+        /* Tables & Content Cards */
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.92rem;
+        }
+
+        th {
+            background: #0f172a;
+            color: var(--text-muted);
+            padding: 12px 14px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .status-pending { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .status-processing { background: rgba(2, 132, 199, 0.2); color: #38bdf8; }
+        .status-out_for_delivery { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+        .status-delivered { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .status-cancelled { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+        .select-status {
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            color: white;
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        /* Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal-dialog {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            color: white;
+            font-family: inherit;
+            font-size: 0.92rem;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .rx-preview-img {
+            max-width: 100%;
+            max-height: 380px;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto 16px;
+            border: 2px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Admin Bar -->
+    <header class="admin-top-bar">
+        <div class="brand-group">
+            <div class="brand-icon">
+                <i class="fa-solid fa-staff-snake"></i>
+            </div>
+            <div>
+                <h2>صيدلية الشفاء الذكية</h2>
+                <span>لوحة التحكم والإدارة المركزية</span>
+            </div>
+        </div>
+
+        <div class="user-nav-actions">
+            <div>
+                <strong>{{ user.get('full_name', 'مستخدم') }}</strong>
+                <span class="role-badge {% if user.get('role') == 'admin' %}role-admin{% else %}role-pharmacist{% endif %}">
+                    <i class="fa-solid {% if user.get('role') == 'admin' %}fa-user-shield{% else %}fa-user-doctor{% endif %}"></i>
+                    {{ user.get('role_display', user.get('role')) }}
+                </span>
+            </div>
+
+            <a href="/" target="_blank" class="btn-action">
+                <i class="fa-solid fa-eye"></i> عرض المتجر
+            </a>
+
+            <button onclick="logout()" class="btn-action btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> خروج
+            </button>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <!-- Stats KPI Grid -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-sales">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>المبيعات الإجمالية</h4>
+                    <div id="statSales" class="stat-value">-- ج.م</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon icon-orders">
+                    <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>إجمالي الطلبات</h4>
+                    <div id="statOrders" class="stat-value">--</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon icon-rx">
+                    <i class="fa-solid fa-file-prescription"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>الروشتات المعلقة</h4>
+                    <div id="statPendingRx" class="stat-value">--</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon icon-stock">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>أدوية قاربت على النفاد</h4>
+                    <div id="statLowStock" class="stat-value">--</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('ordersTab')">
+                <i class="fa-solid fa-boxes-packing"></i> إدارة الطلبات والتوصيل
+            </button>
+            <button class="tab-btn" onclick="switchTab('prescriptionsTab')">
+                <i class="fa-solid fa-file-medical"></i> مراجعة الروشتات الطبية
+            </button>
+            <button class="tab-btn" onclick="switchTab('productsTab')">
+                <i class="fa-solid fa-pills"></i> إدارة الأدوية والمخزون
+            </button>
+            {% if user.get('role') == 'admin' %}
+            <button class="tab-btn" onclick="switchTab('auditTab')">
+                <i class="fa-solid fa-shield-halved"></i> سجل الرقابة والعمليات (Audit)
+            </button>
+            {% endif %}
+        </nav>
+
+        <!-- Tab 1: Orders -->
+        <section id="ordersTab" class="tab-content-panel active">
+            <div class="content-card">
+                <div class="card-header-bar">
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-clock-rotate-left" style="color: var(--secondary);"></i>
+                        قائمة جميع طلبات الشراء
+                    </h3>
+                    <button class="btn-action" onclick="loadOrders()">
+                        <i class="fa-solid fa-rotate"></i> تحديث
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>رقم الطلب</th>
+                                <th>العميل</th>
+                                <th>الهاتف</th>
+                                <th>العنوان</th>
+                                <th>الإجمالي</th>
+                                <th>التاريخ</th>
+                                <th>الحالة الحالية</th>
+                                <th>تحديث الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <tr><td colspan="8" style="text-align: center; color: var(--text-muted);">جاري تحميل الطلبات...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 2: Prescriptions -->
+        <section id="prescriptionsTab" class="tab-content-panel">
+            <div class="content-card">
+                <div class="card-header-bar">
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-receipt" style="color: var(--warning);"></i>
+                        الروشتات الطبية المرفوعة من العملاء
+                    </h3>
+                    <button class="btn-action" onclick="loadPrescriptions()">
+                        <i class="fa-solid fa-rotate"></i> تحديث
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>كود الروشتة</th>
+                                <th>هاتف العميل</th>
+                                <th>العنوان</th>
+                                <th>التاريخ</th>
+                                <th>الحالة</th>
+                                <th>مراجعة واعتماد</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prescriptionsTableBody">
+                            <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">جاري تحميل الروشتات...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 3: Products / Medicines -->
+        <section id="productsTab" class="tab-content-panel">
+            <div class="content-card">
+                <div class="card-header-bar">
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-capsules" style="color: var(--primary);"></i>
+                        كتالوج الأدوية والمخزون
+                    </h3>
+                    <div style="display: flex; gap: 10px;">
+                        {% if user.get('role') == 'admin' %}
+                        <button class="btn-action" style="background: var(--primary); color: white;" onclick="openAddMedicineModal()">
+                            <i class="fa-solid fa-plus"></i> إضافة دواء جديد
+                        </button>
+                        {% endif %}
+                        <button class="btn-action" onclick="loadProducts()">
+                            <i class="fa-solid fa-rotate"></i> تحديث
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>كود الصنف</th>
+                                <th>اسم الدواء</th>
+                                <th>القسم</th>
+                                <th>السعر</th>
+                                <th>المخزون</th>
+                                <th>نوع الصرف</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">جاري تحميل الأدوية...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 4: Audit Logs (Admin Only) -->
+        {% if user.get('role') == 'admin' %}
+        <section id="auditTab" class="tab-content-panel">
+            <div class="content-card">
+                <div class="card-header-bar">
+                    <h3 class="card-title">
+                        <i class="fa-solid fa-shield-halved" style="color: #38bdf8;"></i>
+                        سجل الرقابة وتتبع العمليات (Security Audit Trail)
+                    </h3>
+                    <button class="btn-action" onclick="loadAuditLogs()">
+                        <i class="fa-solid fa-rotate"></i> تحديث السجل
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الوقت</th>
+                                <th>المستخدم</th>
+                                <th>العملية</th>
+                                <th>الجدول</th>
+                                <th>التفاصيل</th>
+                                <th>عنوان IP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auditTableBody">
+                            <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">جاري تحميل سجل التدقيق...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <!-- Modal: View & Review Prescription -->
+    <div id="rxModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 id="rxModalTitle">مراجعة الروشتة الطبية</h3>
+                <button class="btn-action" onclick="closeModal('rxModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <img id="rxModalImage" class="rx-preview-img" src="" alt="صورة الروشتة">
+            <div style="background: #0f172a; padding: 14px; border-radius: 10px; margin-bottom: 14px; font-size: 0.9rem;">
+                <div><strong>هاتف العميل:</strong> <span id="rxModalPhone"></span></div>
+                <div><strong>العنوان:</strong> <span id="rxModalAddress"></span></div>
+                <div><strong>ملاحظات العميل:</strong> <span id="rxModalNotes"></span></div>
+            </div>
+            <div class="form-group">
+                <label>ملاحظات الصيدلي / الأصناف المجهزة:</label>
+                <textarea id="rxPharmacistNotes" class="form-control" rows="2" placeholder="اكتب الأصناف المجهزة وأي بدائل تم الاتفاق عليها..."></textarea>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-submit" style="background: var(--success);" onclick="updateRxStatus('approved')">
+                    <i class="fa-solid fa-check"></i> اعتماد وتجهيز الطلب
+                </button>
+                <button class="btn-submit" style="background: var(--danger);" onclick="updateRxStatus('rejected')">
+                    <i class="fa-solid fa-xmark"></i> رفض (غير واضحة / صنف ناقص)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Product Stock / Price -->
+    <div id="editProductModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3>تحديث بيانات الدواء والمخزون</h3>
+                <button class="btn-action" onclick="closeModal('editProductModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleProductUpdate(event)">
+                <input type="hidden" id="editMedId">
+                <div class="form-group">
+                    <label>اسم الدواء:</label>
+                    <input type="text" id="editMedName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>السعر (ج.م):</label>
+                    <input type="number" id="editMedPrice" class="form-control" step="0.5" required>
+                </div>
+                <div class="form-group">
+                    <label>الكمية المتوفرة في المخزن:</label>
+                    <input type="number" id="editMedStock" class="form-control" min="0" required>
+                </div>
+                <button type="submit" class="btn-submit">حفظ التعديلات</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add New Product (Admin Only) -->
+    <div id="addMedicineModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3>إضافة دواء جديد إلى قاعدة البيانات</h3>
+                <button class="btn-action" onclick="closeModal('addMedicineModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleAddMedicine(event)">
+                <div class="form-group">
+                    <label>اسم الدواء بالعربية:</label>
+                    <input type="text" id="addName" class="form-control" placeholder="مثال: بارامول 500 ملغ" required>
+                </div>
+                <div class="form-group">
+                    <label>الاسم بالإنجليزية:</label>
+                    <input type="text" id="addNameEn" class="form-control" placeholder="Paramol 500mg" required>
+                </div>
+                <div class="form-group">
+                    <label>القسم الطبي:</label>
+                    <select id="addCategory" class="form-control" required>
+                        <option value="pain_fever">مسكنات وخافضات حرارة</option>
+                        <option value="antibiotics">مضادات حيوية ومطهرات</option>
+                        <option value="digestive">الجهاز الهضمي والمعدة</option>
+                        <option value="respiratory">الحساسية والجهاز التنفسي</option>
+                        <option value="chronic">الضغط والقلب والسكر</option>
+                        <option value="vitamins">فيتامينات ومكملات</option>
+                        <option value="skin_hair">العناية بالبشرة والشعر</option>
+                        <option value="pediatrics">صحة ورعاية الأطفال</option>
+                        <option value="medical_supplies">مستلزمات وأجهزة طبية</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>المادة الفعالة:</label>
+                    <input type="text" id="addActive" class="form-control" placeholder="باراسيتامول 500 ملغ" required>
+                </div>
+                <div class="form-group">
+                    <label>الشكل الصيدلاني والعبوة:</label>
+                    <input type="text" id="addForm" class="form-control" placeholder="أقراص (20 قرص)" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label>السعر (ج.م):</label>
+                        <input type="number" id="addPrice" class="form-control" step="0.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>الكمية المبدئية:</label>
+                        <input type="number" id="addStock" class="form-control" value="50" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>دواعي الاستعمال:</label>
+                    <textarea id="addIndications" class="form-control" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>الجرعة وطريقة الاستعمال:</label>
+                    <textarea id="addDosage" class="form-control" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>التحذيرات والموانع:</label>
+                    <textarea id="addWarnings" class="form-control" rows="2" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">إضافة الدواء للمنظومة</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentRxId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadOrders();
+            loadPrescriptions();
+            loadProducts();
+            {% if user.get('role') == 'admin' %}
+            loadAuditLogs();
+            {% endif %}
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/admin/stats');
+                const data = await res.json();
+                document.getElementById('statSales').textContent = data.total_sales + ' ج.م';
+                document.getElementById('statOrders').textContent = data.total_orders;
+                document.getElementById('statPendingRx').textContent = data.pending_prescriptions;
+                document.getElementById('statLowStock').textContent = data.low_stock_medicines;
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function loadOrders() {
+            const tbody = document.getElementById('ordersTableBody');
+            try {
+                const res = await fetch('/api/orders');
+                const orders = await res.json();
+                if (orders.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">لا توجد طلبات بعد.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = orders.map(o => `
+                    <tr>
+                        <td><strong>${o.order_number}</strong></td>
+                        <td>${o.customer_name}</td>
+                        <td>${o.customer_phone}</td>
+                        <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${o.customer_address}</td>
+                        <td><strong>${o.total_amount} ج.م</strong></td>
+                        <td>${o.created_at}</td>
+                        <td><span class="status-badge status-${o.order_status}">${getStatusArabic(o.order_status)}</span></td>
+                        <td>
+                            <select class="select-status" onchange="changeOrderStatus(${o.order_id}, this.value)">
+                                <option value="pending" ${o.order_status === 'pending' ? 'selected' : ''}>قيد المراجعة</option>
+                                <option value="processing" ${o.order_status === 'processing' ? 'selected' : ''}>قيد التجهيز</option>
+                                <option value="out_for_delivery" ${o.order_status === 'out_for_delivery' ? 'selected' : ''}>في الطريق</option>
+                                <option value="delivered" ${o.order_status === 'delivered' ? 'selected' : ''}>تم التسليم</option>
+                                <option value="cancelled" ${o.order_status === 'cancelled' ? 'selected' : ''}>إلغاء</option>
+                            </select>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: red;">خطأ في تحميل الطلبات</td></tr>';
+            }
+        }
+
+        async function changeOrderStatus(orderId, newStatus) {
+            try {
+                const res = await fetch(`/api/orders/${orderId}/status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                if (res.ok) {
+                    loadStats();
+                    loadOrders();
+                } else {
+                    alert('فشل تحديث الحالة');
+                }
+            } catch (e) {
+                alert('خطأ في الاتصال');
+            }
+        }
+
+        function getStatusArabic(st) {
+            const map = {
+                'pending': 'قيد المراجعة',
+                'processing': 'قيد التجهيز',
+                'out_for_delivery': 'في الطريق للتوصيل',
+                'delivered': 'تم التسليم بنجاح',
+                'cancelled': 'ملغي'
+            };
+            return map[st] || st;
+        }
+
+        async function loadPrescriptions() {
+            const tbody = document.getElementById('prescriptionsTableBody');
+            try {
+                const res = await fetch('/api/prescriptions');
+                const rxs = await res.json();
+                if (rxs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">لا توجد روشتات مرفوعة حالياً.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = rxs.map(rx => `
+                    <tr>
+                        <td><strong>${rx.prescription_code}</strong></td>
+                        <td>${rx.customer_phone}</td>
+                        <td>${rx.customer_address}</td>
+                        <td>${rx.created_at}</td>
+                        <td><span class="status-badge status-${rx.status}">${rx.status === 'pending' ? 'بانتظار المراجعة' : rx.status === 'approved' ? 'معتمدة' : 'مرفوضة'}</span></td>
+                        <td>
+                            <button class="btn-action" onclick='viewRx(${JSON.stringify(rx)})'>
+                                <i class="fa-solid fa-eye"></i> فحص واعتماد
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: red;">خطأ في تحميل الروشتات</td></tr>';
+            }
+        }
+
+        function viewRx(rx) {
+            currentRxId = rx.prescription_id;
+            document.getElementById('rxModalTitle').textContent = `مراجعة الروشتة ${rx.prescription_code}`;
+            document.getElementById('rxModalImage').src = rx.image_path;
+            document.getElementById('rxModalPhone').textContent = rx.customer_phone;
+            document.getElementById('rxModalAddress').textContent = rx.customer_address;
+            document.getElementById('rxModalNotes').textContent = rx.notes || 'لا توجد ملاحظات';
+            document.getElementById('rxPharmacistNotes').value = rx.pharmacist_notes || '';
+            openModal('rxModal');
+        }
+
+        async function updateRxStatus(status) {
+            if (!currentRxId) return;
+            const notes = document.getElementById('rxPharmacistNotes').value;
+            try {
+                const res = await fetch(`/api/prescriptions/${currentRxId}/status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: status, notes: notes })
+                });
+                if (res.ok) {
+                    closeModal('rxModal');
+                    loadStats();
+                    loadPrescriptions();
+                } else {
+                    alert('فشل التحديث');
+                }
+            } catch (e) {
+                alert('خطأ في الاتصال');
+            }
+        }
+
+        async function loadProducts() {
+            const tbody = document.getElementById('productsTableBody');
+            try {
+                const res = await fetch('/api/products');
+                const products = await res.json();
+                tbody.innerHTML = products.map(p => `
+                    <tr>
+                        <td><code>${p.id}</code></td>
+                        <td><strong>${p.name}</strong><br><small style="color: var(--text-muted);">${p.nameEn}</small></td>
+                        <td>${p.categoryName}</td>
+                        <td><strong>${p.price} ج.م</strong></td>
+                        <td>
+                            <span style="font-weight: 800; color: ${p.stockCount <= 20 ? '#f87171' : '#34d399'};">
+                                ${p.stockCount} عبوة
+                            </span>
+                        </td>
+                        <td>${p.prescription ? '<span style="color: #fb923c;">وصفة طبية</span>' : '<span style="color: #34d399;">بدون وصفة</span>'}</td>
+                        <td>
+                            <button class="btn-action" onclick='openEditModal(${JSON.stringify(p)})'>
+                                <i class="fa-solid fa-pen-to-square"></i> تعديل
+                            </button>
+                            {% if user.get('role') == 'admin' %}
+                            <button class="btn-action" style="color: #ef4444;" onclick="deleteMedicine('${p.id}')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">خطأ في تحميل الأدوية</td></tr>';
+            }
+        }
+
+        function openEditModal(p) {
+            document.getElementById('editMedId').value = p.id;
+            document.getElementById('editMedName').value = p.name;
+            document.getElementById('editMedPrice').value = p.price;
+            document.getElementById('editMedStock').value = p.stockCount;
+            openModal('editProductModal');
+        }
+
+        async function handleProductUpdate(e) {
+            e.preventDefault();
+            const id = document.getElementById('editMedId').value;
+            const name = document.getElementById('editMedName').value;
+            const price = document.getElementById('editMedPrice').value;
+            const stock = document.getElementById('editMedStock').value;
+
+            try {
+                const res = await fetch(`/api/products/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name, price: price, stockCount: stock })
+                });
+                if (res.ok) {
+                    closeModal('editProductModal');
+                    loadProducts();
+                    loadStats();
+                } else {
+                    alert('فشل التحديث');
+                }
+            } catch (e) {
+                alert('خطأ في الاتصال');
+            }
+        }
+
+        async function deleteMedicine(id) {
+            if (!confirm('هل أنت متأكد من رغبتك في حذف هذا الدواء؟')) return;
+            try {
+                const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    loadProducts();
+                    loadStats();
+                } else {
+                    alert('فشل الحذف');
+                }
+            } catch (e) {
+                alert('خطأ في الاتصال');
+            }
+        }
+
+        function openAddMedicineModal() {
+            openModal('addMedicineModal');
+        }
+
+        async function handleAddMedicine(e) {
+            e.preventDefault();
+            const payload = {
+                name: document.getElementById('addName').value,
+                nameEn: document.getElementById('addNameEn').value,
+                category: document.getElementById('addCategory').value,
+                activeIngredient: document.getElementById('addActive').value,
+                form: document.getElementById('addForm').value,
+                price: document.getElementById('addPrice').value,
+                stockCount: document.getElementById('addStock').value,
+                indications: document.getElementById('addIndications').value,
+                dosage: document.getElementById('addDosage').value,
+                warnings: document.getElementById('addWarnings').value
+            };
+
+            try {
+                const res = await fetch('/api/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    closeModal('addMedicineModal');
+                    loadProducts();
+                    loadStats();
+                } else {
+                    const data = await res.json();
+                    alert(data.message || 'فشلت الإضافة');
+                }
+            } catch (e) {
+                alert('خطأ في الاتصال');
+            }
+        }
+
+        {% if user.get('role') == 'admin' %}
+        async function loadAuditLogs() {
+            const tbody = document.getElementById('auditTableBody');
+            try {
+                const res = await fetch('/api/admin/audit-logs');
+                const logs = await res.json();
+                tbody.innerHTML = logs.map(l => `
+                    <tr>
+                        <td><code>${l.created_at}</code></td>
+                        <td><strong>${l.username}</strong></td>
+                        <td><span style="color: var(--secondary); font-weight: 700;">${l.action}</span></td>
+                        <td>${l.entity_name}</td>
+                        <td>${l.details || ''}</td>
+                        <td><small style="color: var(--text-muted);">${l.ip_address || '127.0.0.1'}</small></td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: red;">خطأ في تحميل سجل الرقابة</td></tr>';
+            }
+        }
+        {% endif %}
+
+        async function logout() {
+            await fetch('/api/auth/logout', { method: 'POST' });
+            window.location.href = '/login';
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    </script>
+</body>
+</html>
