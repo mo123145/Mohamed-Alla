@@ -43,6 +43,7 @@ The project pages include interactive browser demos for the store and task list
 dashboard populated with illustrative sample data. The store is a preview only
 and does not accept payments.
 
-Two supplied standalone projects are available under `projects/lumina/` and
-`projects/portfolio-backup/`. Lumina's product catalog and cart are a local
-demo only; the checkout button does not process payments.
+Four supplied standalone projects are available under `projects/lumina/`,
+`projects/portfolio-backup/`, `projects/factory-management/`, and
+`projects/al-basha-grill/`. Lumina's product catalog and cart are a local demo
+only; the checkout button does not process payments.

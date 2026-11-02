@@ -16,7 +16,7 @@
       container.appendChild(p);
     }
 
-    // ===== ALL 14 PROJECTS DATA =====
+    // ===== ALL 16 PROJECTS DATA =====
     const PROJECTS_DATA = [
       {
         id: 0,
@@ -657,6 +657,94 @@ const { reply } = await response.json();`,
           { val: 'Sections', lbl: 'أقسام تعريفية' },
           { val: 'Motion', lbl: 'تأثيرات تمرير' },
           { val: 'Standalone', lbl: 'صفحة مستقلة' }
+        ]
+      },
+      {
+        id: 14,
+        demoId: 'demo-factory-management',
+        demoUrl: 'projects/factory-management/index.html',
+        slug: 'factory-management',
+        emoji: '🏭',
+        titleAr: 'نظام إدارة المصنع',
+        titleEn: 'Factory Management System',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'أنظمة الإدارة ولوحات التحكم',
+        year: '2026',
+        desc: 'لوحة إدارة عربية للمصنع تعرض أقساماً لمتابعة المنتجات والعملاء والحضور، مع أدوات للتقارير وتصدير البيانات.',
+        features: [
+          { icon: '📊', title: 'لوحة متابعة', desc: 'واجهة رئيسية لعرض مؤشرات وملخصات بيانات المصنع.' },
+          { icon: '📦', title: 'إدارة المنتجات والعملاء', desc: 'أقسام مخصصة لعرض وتنظيم بيانات المنتجات والعملاء.' },
+          { icon: '📄', title: 'تقارير وتصدير', desc: 'إنشاء تقارير قابلة للحفظ بصيغة PDF وتصدير نسخة بيانات JSON.' },
+          { icon: '🌐', title: 'واجهة عربية', desc: 'واجهة استخدام باللغة العربية مع إمكانية تغيير اللغة.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة لوحة الإدارة' },
+          { icon: '🎨', name: 'CSS', role: 'تنسيق الواجهة المتجاوبة' },
+          { icon: '⚡', name: 'JavaScript', role: 'إدارة الواجهة والبيانات' },
+          { icon: '📄', name: 'html2pdf.js', role: 'تصدير التقارير إلى PDF' }
+        ],
+        codeFile: 'projects/factory-management/index.html',
+        code: `function exportData() {
+  const blob = new Blob([JSON.stringify(state)], {
+    type: 'application/json'
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'factory_backup.json';
+  link.click();
+}`,
+        metrics: [
+          { val: 'Products', lbl: 'إدارة المنتجات' },
+          { val: 'Clients', lbl: 'إدارة العملاء' },
+          { val: 'Reports', lbl: 'تقارير قابلة للتصدير' },
+          { val: 'Arabic', lbl: 'واجهة عربية' }
+        ]
+      },
+      {
+        id: 15,
+        demoId: 'demo-al-basha-grill',
+        demoUrl: 'projects/al-basha-grill/index.html',
+        slug: 'al-basha-grill',
+        emoji: '🔥',
+        titleAr: 'مطعم الباشا للمشويات',
+        titleEn: 'Al Basha Grill Restaurant',
+        status: 'new',
+        statusText: 'مشروع جديد',
+        category: 'مواقع المطاعم والواجهات المتجاوبة',
+        year: '2026',
+        desc: 'موقع عربي لمطعم الباشا للمشويات، يعرض قائمة الطعام والعروض ومعلومات المطعم والتواصل ضمن صفحة متجاوبة.',
+        features: [
+          { icon: '🍽️', title: 'قائمة الطعام', desc: 'عرض أصناف المطعم ضمن أقسام مخصصة.' },
+          { icon: '🏷️', title: 'العروض', desc: 'قسم مخصص لإبراز العروض والأطباق.' },
+          { icon: '📱', title: 'تصميم متجاوب', desc: 'واجهة تتكيف مع أحجام الشاشات المختلفة.' },
+          { icon: '✨', title: 'حركات الظهور', desc: 'تأثيرات تمرير باستخدام مكتبة AOS.' }
+        ],
+        tech: [
+          { icon: '🌐', name: 'HTML', role: 'هيكلة أقسام الموقع' },
+          { icon: '🎨', name: 'CSS', role: 'التصميم والتجاوب والحركات' },
+          { icon: '⚡', name: 'JavaScript', role: 'التفاعلات وعرض الأقسام' },
+          { icon: '✨', name: 'AOS', role: 'تأثيرات الظهور أثناء التمرير' }
+        ],
+        codeFile: 'projects/al-basha-grill/index.html',
+        code: `catButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.dataset.cat;
+    cards.forEach(card => {
+      card.style.display =
+        category === 'all' || card.dataset.cat === category
+          ? 'flex'
+          : 'none';
+    });
+    AOS.refresh();
+  });
+});`,
+        metrics: [
+          { val: 'Menu', lbl: 'قائمة طعام' },
+          { val: 'Offers', lbl: 'عروض المطعم' },
+          { val: 'Responsive', lbl: 'تصميم متجاوب' },
+          { val: 'Arabic', lbl: 'محتوى عربي' }
         ]
       }
     ];

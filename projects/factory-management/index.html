@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>عدي | نظام إدارة المصنع المتطور</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg: #f8fafc;
+            --sidebar: #0f172a;
+            --card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ---------- Layout ---------- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar);
+            color: white;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            right: 0;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-right: 260px;
+            padding: 32px;
+            max-width: calc(100% - 260px);
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+            padding: 0 12px;
+        }
+
+        .brand span {
+            background: var(--primary);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: right;
+            font-size: 16px;
+        }
+
+        .nav-item:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .lang-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: var(--radius-sm);
+            margin-top: auto;
+        }
+
+        .lang-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--sidebar);
+        }
+
+        /* ---------- Typography & Utility ---------- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            border-color: var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        .btn-danger {
+            background: #fef2f2;
+            color: var(--danger);
+            border-color: #fee2e2;
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* ---------- Stats ---------- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .stat-trend {
+            font-size: 12px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .trend-up {
+            color: var(--success);
+        }
+
+        .trend-down {
+            color: var(--danger);
+        }
+
+        /* ---------- Forms ---------- */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* ---------- Tables ---------- */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+        }
+
+        th {
+            padding: 16px;
+            background: #f8fafc;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            font-size: 15px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f1f5f9;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-warning {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ---------- Sections ---------- */
+        .section {
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- Notifications ---------- */
+        #toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 1000;
+        }
+
+        .toast {
+            background: #1e293b;
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ---------- Mobile ---------- */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(100%);
+                right: 0;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-right: 0;
+                max-width: 100%;
+                padding: 16px;
+            }
+
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+                padding: 12px;
+                justify-content: space-around;
+                z-index: 1000;
+            }
+        }
+
+        @media screen and (min-width: 1025px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            padding-right: 40px;
+            width: 100%;
+            background: #f1f5f9;
+            border: none;
+        }
+
+        .search-bar::after {
+            content: '🔍';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <a href="#" class="brand">
+            عدي <span>PRO</span>
+        </a>
+
+        <div class="nav-menu">
+            <button class="nav-item active" onclick="showSection('dashboard')" id="nav-dashboard">
+                <i>🏠</i> <span data-ar="لوحة التحكم" data-en="Dashboard">لوحة التحكم</span>
+            </button>
+            <button class="nav-item" onclick="showSection('inventory')" id="nav-inventory">
+                <i>📦</i> <span data-ar="المخزن" data-en="Inventory">المخزن</span>
+            </button>
+            <button class="nav-item" onclick="showSection('clients')" id="nav-clients">
+                <i>👥</i> <span data-ar="العملاء" data-en="Clients">العملاء</span>
+            </button>
+            <button class="nav-item" onclick="showSection('staff')" id="nav-staff">
+                <i>👤</i> <span data-ar="الموظفين" data-en="Staff">الموظفين</span>
+            </button>
+            <button class="nav-item" onclick="showSection('reports')" id="nav-reports">
+                <i>📊</i> <span data-ar="التقارير" data-en="Reports">التقارير</span>
+            </button>
+        </div>
+
+        <div class="lang-switcher">
+            <button class="lang-btn active" id="btn-ar" onclick="setLang('ar')">AR</button>
+            <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="header">
+            <div>
+                <h1 id="page-title">لوحة التحكم</h1>
+                <p style="color: var(--text-muted); font-size: 14px;" id="current-date"></p>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-outline" onclick="exportData()">📤 <span data-ar="تصدير" data-en="Export">تصدير
+                        النسخة الاحتياطية</span></button>
+                <button class="btn btn-primary" onclick="refreshAll()">🔄 <span data-ar="تحديث" data-en="Refresh">تحديث
+                        البيانات</span></button>
+            </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label" data-ar="إجمالي المنتجات" data-en="Total Products">إجمالي المنتجات</span>
+                    <div class="stat-value" id="stat-products">0</div>
+                    <div class="stat-trend trend-up">↑ 12% <span data-ar="هذا الشهر" data-en="this month">هذا
+                            الشهر</span></div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label" data-ar="إجمالي العملاء" data-en="Total Clients">إجمالي العملاء</span>
+                    <div class="stat-value" id="stat-clients">0</div>
+                    <div class="stat-trend trend-up">↑ 5% <span data-ar="نمو" data-en="growth">نمو</span></div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label" data-ar="حضور اليوم" data-en="Attendance Today">حضور اليوم</span>
+                    <div class="stat-value" id="stat-attendance">0</div>
+                    <div class="stat-trend trend-up">↑ <span id="stat-attendance-percent">0</span>% <span
+                            data-ar="نسبة الحضور" data-en="attendance rate">نسبة الحضور</span></div>
+                </div>
+                <div class="stat-card" style="border-right: 4px solid var(--danger);">
+                    <span class="stat-label" data-ar="نواقص المخزن" data-en="Low Stock">نواقص المخزن</span>
+                    <div class="stat-value" id="stat-lowstock" style="color: var(--danger);">0</div>
+                    <div class="stat-trend" data-ar="تحتاج للطلب" data-en="Needs ordering">تحتاج للطلب</div>
+                </div>
+            </div>
+
+            <!-- Quick ID Attendance Input -->
+            <div class="card"
+                style="background: var(--primary); color: white; display: flex; align-items: center; gap: 20px;">
+                <div style="flex: 1;">
+                    <h2 style="font-size: 20px; margin-bottom: 5px;" data-ar="تسجيل سريع عبر الكود"
+                        data-en="Quick Check-in (ID)">تسجيل سريع عبر الكود</h2>
+                    <p style="opacity: 0.8; font-size: 14px;" data-ar="اكتب كود الموظف واضغط Enter للتسجيل"
+                        data-en="Type Employee ID and press Enter">اكتب كود الموظف واضغط Enter للتسجيل (حضور/انصراف)</p>
+                </div>
+                <div style="flex: 1;">
+                    <input type="text" id="quick-id-input" placeholder="اكتب ID الموظف هنا..."
+                        style="width: 100%; font-size: 24px; text-align: center; border: none; padding: 15px;"
+                        onkeypress="if(event.key === 'Enter') handleQuickID()">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-ar="تحضير الموظفين اليومي" data-en="Daily Staff Attendance">تحضير
+                        الموظفين اليومي</h2>
+                    <div style="font-size: 14px; font-weight: bold; color: var(--primary);" id="attendance-date"></div>
+                </div>
+                <div class="table-responsive">
+                    <table id="attendanceTable">
+                        <thead>
+                            <tr>
+                                <th data-ar="الموظف" data-en="Employee">الموظف</th>
+                                <th data-ar="تسجيل حضور" data-en="Check In">تسجيل حضور</th>
+                                <th data-ar="تسجيل انصراف" data-en="Check Out">تسجيل انصراف</th>
+                                <th data-ar="تسجيل غياب" data-en="Absent">تسجيل غياب</th>
+                                <th data-ar="الحالة" data-en="Status">الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- INVENTORY -->
+        <section id="inventory" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-ar="إضافة منتج جديد" data-en="Add New Product">إضافة منتج جديد</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label data-ar="اسم المنتج" data-en="Product Name">اسم المنتج</label>
+                        <input id="pname" placeholder="مثال: محرك طوي" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="الكمية" data-en="Quantity">الكمية</label>
+                        <input id="pqty" type="number" placeholder="0" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="السعر" data-en="Price">السعر</label>
+                        <input id="pprice" type="number" placeholder="0.00" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="حد التنبيه" data-en="Min Stock">حد التنبيه</label>
+                        <input id="pmin" type="number" value="5" />
+                    </div>
+                    <div class="form-group" style="justify-content: flex-end;">
+                        <button class="btn btn-primary" onclick="addProduct()">➕ <span data-ar="إضافة للمخزن"
+                                data-en="Add to Stock">إضافة للمخزن</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="search-bar">
+                    <input type="text" id="inventorySearch" placeholder="بحث في المخزن..."
+                        oninput="filterTable('productsTable', this.value)">
+                </div>
+                <div class="table-responsive">
+                    <table id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-ar="الاسم" data-en="Name">الاسم</th>
+                                <th data-ar="الكمية" data-en="Qty">الكمية</th>
+                                <th data-ar="السعر" data-en="Price">السعر</th>
+                                <th data-ar="الحالة" data-en="Status">الحالة</th>
+                                <th data-ar="الإجراءات" data-en="Actions">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIENTS -->
+        <section id="clients" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-ar="إضافة عميل" data-en="Add Client">إضافة عميل</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label data-ar="اسم العميل" data-en="Client Name">اسم العميل</label>
+                        <input id="cname" placeholder="الاسم بالكامل" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="رقم الهاتف" data-en="Phone">رقم الهاتف</label>
+                        <input id="cphone" placeholder="01xxxxxxxxx" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="نوع الخدمة" data-en="Service Type">نوع الخدمة</label>
+                        <input id="cservice" placeholder="مثال: صيانة دورية" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="موعد الصيانة القادم" data-en="Next Service">موعد الصيانة القادم</label>
+                        <input id="cdate" type="date" />
+                    </div>
+                    <div class="form-group" style="justify-content: flex-end;">
+                        <button class="btn btn-primary" onclick="addClient()">➕ <span data-ar="حفظ العميل"
+                                data-en="Save Client">حفظ العميل</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table id="clientsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-ar="الاسم" data-en="Name">الاسم</th>
+                                <th data-ar="الهاتف" data-en="Phone">الهاتف</th>
+                                <th data-ar="الخدمة" data-en="Service">الخدمة</th>
+                                <th data-ar="الموعد" data-en="Next Date">الموعد</th>
+                                <th data-ar="الحالة" data-en="Status">الحالة</th>
+                                <th data-ar="حذف" data-en="Delete">حذف</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAFF MANAGEMENT -->
+        <section id="staff" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-ar="إضافة موظف جديد" data-en="Add New Staff">إضافة موظف جديد</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label data-ar="كود الموظف (ID)" data-en="Employee ID">كود الموظف (ID)</label>
+                        <input id="sid" placeholder="مثال: 101" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="اسم الموظف" data-en="Staff Name">اسم الموظف</label>
+                        <input id="sname" placeholder="الاسم الرباعي" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="الوظيفة / القسم" data-en="Position">الوظيفة / القسم</label>
+                        <input id="spos" placeholder="مثال: فني صيانة" />
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="الراتب الأساسي" data-en="Salary">الراتب الأساسي</label>
+                        <input id="ssalary" type="number" placeholder="5000" />
+                    </div>
+                    <div class="form-group" style="justify-content: flex-end;">
+                        <button class="btn btn-primary" onclick="addStaff()">➕ <span data-ar="حفظ البيانات"
+                                data-en="Save Staff">حفظ البيانات</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table id="staffsListTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-ar="الاسم" data-en="Name">الاسم</th>
+                                <th data-ar="الوظيفة" data-en="Position">الوظيفة</th>
+                                <th data-ar="الراتب" data-en="Salary">الراتب</th>
+                                <th data-ar="حذف" data-en="Delete">حذف</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- REPORTS -->
+        <section id="reports" class="section">
+            <div class="stats-grid">
+                <div class="stat-card" style="cursor: pointer;" onclick="downloadPDF('products')">
+                    <div style="font-size: 40px; margin-bottom: 10px;">📄</div>
+                    <h3 data-ar="تقرير المخزن" data-en="Inventory">تقرير المخزن</h3>
+                    <p data-ar="تحميل قائمة المنتجات والكميات" data-en="Download products list">تحميل قائمة المنتجات
+                        والكميات</p>
+                </div>
+                <div class="stat-card" style="cursor: pointer;" onclick="downloadPDF('clients')">
+                    <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
+                    <h3 data-ar="تقرير العملاء" data-en="Clients">تقرير العملاء</h3>
+                    <p data-ar="تحميل بيانات العملاء ومواعيد الصيانة" data-en="Download client database">تحميل بيانات
+                        العملاء ومواعيد الصيانة</p>
+                </div>
+                <div class="stat-card" style="cursor: pointer; grid-column: span 2; border: 2px solid var(--primary);"
+                    onclick="downloadPDF('full')">
+                    <div style="font-size: 40px; margin-bottom: 10px;">📋</div>
+                    <h3 data-ar="التقرير الشامل" data-en="Full Report">التقرير الشامل</h3>
+                    <p data-ar="تصدير كل بيانات النظام (المخزن + العملاء + سجل الصيانة) في ملف واحد"
+                        data-en="Export all data (Inventory + Clients + History) in one file">تصدير كل بيانات النظام
+                        (المخزن + العملاء + سجل الصيانة) في ملف واحد</p>
+                </div>
+                <div class="stat-card" style="cursor: pointer;" onclick="downloadPDF('dashboard')">
+                    <div style="font-size: 40px; margin-bottom: 10px;">🏠</div>
+                    <h3 data-ar="لوحة التحكم" data-en="Dashboard">لوحة التحكم</h3>
+                </div>
+                <div class="stat-card" style="cursor: pointer;" onclick="window.print()">
+                    <div style="font-size: 40px; margin-bottom: 10px;">🖨️</div>
+                    <h3 data-ar="طباعة الشاشة" data-en="Print View">طباعة الشاشة</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-container"></div>
+
+    <script>
+        /* ===================== CONFIG & STORAGE ===================== */
+        const USE_API = false;
+        const API_URL = "";
+
+        let state = {
+            products: JSON.parse(localStorage.getItem('adi_products')) || [],
+            clients: JSON.parse(localStorage.getItem('adi_clients')) || [],
+            staff: JSON.parse(localStorage.getItem('adi_staff')) || [],
+            attendance: JSON.parse(localStorage.getItem('adi_attendance')) || {}, // { date: { staffId: {in, out, status} } }
+            lang: localStorage.getItem('adi_lang') || 'ar'
+        };
+
+        function saveData() {
+            localStorage.setItem('adi_products', JSON.stringify(state.products));
+            localStorage.setItem('adi_clients', JSON.stringify(state.clients));
+            localStorage.setItem('adi_staff', JSON.stringify(state.staff));
+            localStorage.setItem('adi_attendance', JSON.stringify(state.attendance));
+            localStorage.setItem('adi_lang', state.lang);
+        }
+
+        /* ===================== UI CORE ===================== */
+        function showSection(id) {
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+
+            document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active"));
+            const navBtn = document.getElementById("nav-" + id);
+            if (navBtn) navBtn.classList.add("active");
+
+            const titles = {
+                dashboard: { ar: "لوحة التحكم", en: "Dashboard" },
+                inventory: { ar: "المخزن والمستودع", en: "Inventory" },
+                clients: { ar: "إدارة العملاء", en: "Client Management" },
+                staff: { ar: "إدارة الموظفين", en: "Staff Management" },
+                reports: { ar: "التقارير والإحصائيات", en: "Reports" }
+            };
+            document.getElementById("page-title").innerText = titles[id][state.lang];
+        }
+
+        function setLang(l) {
+            state.lang = l;
+            localStorage.setItem('adi_lang', l);
+            document.documentElement.lang = l;
+            document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+
+            document.getElementById("btn-ar").classList.toggle("active", l === "ar");
+            document.getElementById("btn-en").classList.toggle("active", l === "en");
+
+            document.querySelectorAll("[data-ar]").forEach(el => {
+                el.innerText = el.dataset[l];
+            });
+
+            const activeSection = document.querySelector(".section.active").id;
+            showSection(activeSection);
+            renderAll();
+        }
+
+        function toast(msg) {
+            const container = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'toast';
+            t.innerHTML = `<span>🔔</span> ${msg}`;
+            container.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        /* ===================== LOGIC ===================== */
+
+        function addProduct() {
+            const name = document.getElementById('pname').value;
+            const qty = Number(document.getElementById('pqty').value);
+            const price = Number(document.getElementById('pprice').value);
+            const min = Number(document.getElementById('pmin').value);
+            if (!name) return toast("يرجى إدخال اسم المنتج");
+            state.products.push({ id: Date.now(), name, quantity: qty, price, min_stock: min });
+            saveData();
+            renderAll();
+            document.getElementById('pname').value = '';
+            document.getElementById('pqty').value = '';
+            document.getElementById('pprice').value = '';
+            toast("تمت إضافة المنتج");
+        }
+
+        function addClient() {
+            const name = document.getElementById('cname').value;
+            const phone = document.getElementById('cphone').value;
+            const service = document.getElementById('cservice').value;
+            const date = document.getElementById('cdate').value;
+            if (!name) return toast("يرجى إدخال الاسم");
+            state.clients.push({ id: Date.now(), name, phone, service, next_service: date });
+            saveData();
+            renderAll();
+            document.getElementById('cname').value = '';
+            document.getElementById('cphone').value = '';
+            toast("تم حفظ العميل");
+        }
+
+        function addStaff() {
+            const sid = document.getElementById('sid').value;
+            const name = document.getElementById('sname').value;
+            const pos = document.getElementById('spos').value;
+            const salary = document.getElementById('ssalary').value;
+            if (!sid || !name) return toast("يرجى إدخال الكود والاسم");
+
+            // Check if ID exists
+            if (state.staff.some(s => s.empId === sid)) return toast("هذا الكود مستخدم بالفعل لموظف آخر");
+
+            state.staff.push({ id: Date.now(), empId: sid, name, position: pos, salary: Number(salary) });
+            saveData();
+            renderAll();
+            document.getElementById('sid').value = '';
+            document.getElementById('sname').value = '';
+            document.getElementById('spos').value = '';
+            document.getElementById('ssalary').value = '';
+            toast("تمت إضافة الموظف بنجاح");
+        }
+
+        function deleteProduct(id) { state.products = state.products.filter(p => p.id !== id); saveData(); renderAll(); }
+        function deleteClient(id) { state.clients = state.clients.filter(c => c.id !== id); saveData(); renderAll(); }
+        function deleteStaff(id) { state.staff = state.staff.filter(s => s.id !== id); saveData(); renderAll(); }
+
+        /* ===================== ATTENDANCE ===================== */
+        function getTodayKey() { return new Date().toISOString().split('T')[0]; }
+
+        function handleQuickID() {
+            const input = document.getElementById('quick-id-input');
+            const empId = input.value.trim();
+            if (!empId) return;
+
+            const staff = state.staff.find(s => s.empId === empId);
+            if (!staff) {
+                toast("❌ كود الموظف غير صحيح !");
+                input.value = '';
+                return;
+            }
+
+            const today = getTodayKey();
+            if (!state.attendance[today]) state.attendance[today] = {};
+            const record = state.attendance[today][staff.id] || { in: '-', out: '-', status: 'none' };
+
+            // Logic: if not in today -> Check IN. If IN today -> Check OUT.
+            if (record.status !== 'presents') {
+                markAttendance(staff.id, 'in');
+                toast(`✅ تم تسجيل حضور: ${staff.name}`);
+            } else if (record.out === '-') {
+                markAttendance(staff.id, 'out');
+                toast(`🚪 تم تسجيل انصراف: ${staff.name}`);
+            } else {
+                toast(`⚠️ الموظف ${staff.name} مسجل حضور وانصراف بالفعل`);
+            }
+
+            input.value = '';
+        }
+
+        function markAttendance(staffId, type) {
+            const today = getTodayKey();
+            if (!state.attendance[today]) state.attendance[today] = {};
+            if (!state.attendance[today][staffId]) state.attendance[today][staffId] = { in: '-', out: '-', status: 'none' };
+
+            const record = state.attendance[today][staffId];
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            if (type === 'in') {
+                record.in = now;
+                record.status = 'presents';
+            } else if (type === 'out') {
+                record.out = now;
+            } else if (type === 'absent') {
+                record.status = 'absent';
+                record.in = '-';
+                record.out = '-';
+            }
+
+            saveData();
+            renderDashboard();
+        }
+
+        /* ===================== RENDERING ===================== */
+        function renderAll() {
+            renderProducts();
+            renderClients();
+            renderStaffList();
+            renderDashboard();
+        }
+
+        function renderProducts() {
+            const tbody = document.querySelector("#productsTable tbody");
+            tbody.innerHTML = "";
+            let low = 0;
+            state.products.forEach(p => {
+                const isLow = p.quantity <= (p.min_stock || 5);
+                if (isLow) low++;
+                tbody.innerHTML += `<tr><td>#${String(p.id).slice(-4)}</td><td style="font-weight:600">${p.name}</td><td>${p.quantity}</td><td>${p.price.toLocaleString()}</td><td><span class="badge ${isLow ? 'badge-danger' : 'badge-success'}">${isLow ? 'منخفض' : 'متوفر'}</span></td><td><button class="btn btn-danger" onclick="deleteProduct(${p.id})">🗑</button></td></tr>`;
+            });
+            document.getElementById('stat-products').innerText = state.products.length;
+            document.getElementById('stat-lowstock').innerText = low;
+        }
+
+        function renderClients() {
+            const tbody = document.querySelector("#clientsTable tbody");
+            tbody.innerHTML = "";
+            state.clients.forEach(c => {
+                tbody.innerHTML += `<tr><td>#${String(c.id).slice(-4)}</td><td>${c.name}</td><td>${c.phone}</td><td>${c.service}</td><td>${c.next_service || '-'}</td><td>---</td><td><button class="btn btn-danger" onclick="deleteClient(${c.id})">🗑</button></td></tr>`;
+            });
+            document.getElementById('stat-clients').innerText = state.clients.length;
+        }
+
+        function renderStaffList() {
+            const tbody = document.querySelector("#staffsListTable tbody");
+            tbody.innerHTML = "";
+            state.staff.forEach(s => {
+                tbody.innerHTML += `<tr><td>#${String(s.id).slice(-4)}</td><td>${s.name}</td><td>${s.position}</td><td>${s.salary.toLocaleString()}</td><td><button class="btn btn-danger" onclick="deleteStaff(${s.id})">�</button></td></tr>`;
+            });
+        }
+
+        function renderDashboard() {
+            const today = getTodayKey();
+            document.getElementById('attendance-date').innerText = today;
+            const tbody = document.querySelector("#attendanceTable tbody");
+            tbody.innerHTML = "";
+
+            let presentCount = 0;
+            state.staff.forEach(s => {
+                const att = (state.attendance[today] && state.attendance[today][s.id]) || { in: '-', out: '-', status: 'none' };
+                if (att.status === 'presents') presentCount++;
+
+                const statusBadge = att.status === 'presents' ? '<span class="badge badge-success">حاضر</span>' :
+                    (att.status === 'absent' ? '<span class="badge badge-danger">غائب</span>' : '<span class="badge badge-warning">لم يحضر بعد</span>');
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight:600">${s.name}</td>
+                        <td><button class="btn btn-outline" onclick="markAttendance(${s.id}, 'in')">🕙 ${att.in}</button></td>
+                        <td><button class="btn btn-outline" onclick="markAttendance(${s.id}, 'out')">🚪 ${att.out}</button></td>
+                        <td><button class="btn btn-danger" style="padding: 5px 10px" onclick="markAttendance(${s.id}, 'absent')">✖</button></td>
+                        <td>${statusBadge}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('stat-attendance').innerText = presentCount;
+            const percent = state.staff.length ? Math.round((presentCount / state.staff.length) * 100) : 0;
+            document.getElementById('stat-attendance-percent').innerText = percent;
+        }
+
+        /* ===================== PDF ===================== */
+        function downloadPDF(type) {
+            let element = document.createElement('div');
+            element.style.padding = '20px';
+            element.style.direction = state.lang === 'ar' ? 'rtl' : 'ltr';
+            element.style.fontFamily = 'Cairo, sans-serif';
+            let title = type === 'products' ? 'تقرير المخزن' : (type === 'clients' ? 'تقرير العملاء' : 'التقرير الشامل');
+
+            element.innerHTML = `<div style="text-align:center"><h1 style="color:#2563eb">عدي PRO</h1><h2>${title}</h2><p>${new Date().toLocaleDateString('ar-EG')}</p></div>`;
+
+            if (type === 'products') element.appendChild(document.getElementById('productsTable').cloneNode(true));
+            else if (type === 'clients') element.appendChild(document.getElementById('clientsTable').cloneNode(true));
+            else {
+                element.appendChild(document.getElementById('productsTable').cloneNode(true));
+                element.appendChild(document.getElementById('clientsTable').cloneNode(true));
+                element.appendChild(document.getElementById('attendanceTable').cloneNode(true));
+            }
+
+            const opt = { margin: 10, filename: `report_${Date.now()}.pdf`, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+            toast("جاري تحضير التقرير...");
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function exportData() {
+            const blob = new Blob([JSON.stringify(state)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'factory_backup.json'; a.click();
+            toast("تم تصدير النسخة الاحتياطية");
+        }
+
+        function refreshAll() { renderAll(); toast("تم تحديث البيانات"); }
+
+        /* ===================== INIT ===================== */
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        setLang(state.lang);
+        showSection('dashboard');
+    </script>
+</body>
+
+</html>
